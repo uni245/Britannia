@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#150d08">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="베리타스 탐정 사무소의 브리타니아 제국 기밀 문서고. 세계관, 주요 인물, 주요 지역의 기록을 열람하세요.">
+<title>VERITAS DETECTIVE AGENCY / BRITANNIA ARCHIVES</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nanum+Myeongjo:wght@400;700;800&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Shippori+Mincho:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============ 1. TOKENS ============ */
+:root{
+  --ink:#0c0806; --wood-1:#150d08; --wood-2:#1f130b; --wood-3:#2c1a0f;
+  --brown:#3d2515; --brown-2:#573520;
+  --gold:#b8923f; --gold-hi:#ead08a; --gold-lo:#6f5319;
+  --ivory:#eadfc4; --ivory-dim:#b9ab8c;
+  --parch:#e3d3ac; --parch-ink:#25180d; --parch-mute:#6a5236;
+  --oxblood:#6b121a; --velvet:#4a0b12;
+  --line:rgba(184,146,63,.38);
+  --f-display:'Abril Fatface','Nanum Myeongjo','AppleMyungjo','Noto Serif KR','Batang',serif;
+  --f-text:'Old Standard TT','Nanum Myeongjo','AppleMyungjo','Noto Serif KR','Batang','바탕',Georgia,serif;
+  --hh:76px;
+  --ease:cubic-bezier(.22,.7,.2,1);
+  --tex-paper:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='p' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .42 0 0 0 0 .30 0 0 0 0 .14 0 0 0 .55 -.12'/></filter><rect width='220' height='220' filter='url(%23p)'/></svg>");
+  --tex-wood:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='520'><filter id='w' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.0035 .06' numOctaves='4' seed='11' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .05 0 0 0 0 .025 0 0 0 0 .01 0 0 0 1.5 -.42'/></filter><rect width='800' height='520' filter='url(%23w)'/></svg>");
+}
+
+/* ============ 2. BASE ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--hh) + 10px)}
+body{margin:0;min-height:100vh;background:var(--wood-1);color:var(--ivory);font-family:var(--f-text);font-size:17px;line-height:1.85;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body.is-landing{overflow:hidden}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure,blockquote{margin:0;padding:0}
+ul,ol{list-style:none}
+a{color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:fixed;left:12px;top:-64px;z-index:200;padding:8px 14px;background:var(--ivory);color:var(--ink);transition:top .2s}
+.skip:focus{top:12px}
+.wrap{width:min(1160px,100% - 40px);margin-inline:auto}
+.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ============ 3. SHARED OBJECTS ============ */
+.app{background:var(--tex-wood),radial-gradient(120% 70% at 50% 0%,#35210f 0%,#1a0f08 58%,#0e0805 100%);background-color:var(--wood-1)}
+
+/* gilt frame */
+.frame{position:relative;display:block;padding:clamp(8px,1.4vw,13px);background:linear-gradient(135deg,#f3da92 0%,#b8923f 22%,#7a5b1d 48%,#d6b564 70%,#8a6a26 100%);box-shadow:0 0 0 1px #2a1c08,0 18px 36px -10px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,244,200,.7),inset 0 0 0 1px rgba(60,38,6,.55),inset 0 0 0 4px rgba(244,222,150,.16)}
+.frame::after{content:"";position:absolute;inset:clamp(4px,.8vw,7px);border:1px solid rgba(48,30,4,.7);box-shadow:0 0 0 1px rgba(255,236,170,.35);pointer-events:none}
+
+/* picture holder (+ missing-file notice) */
+.ph{position:relative;display:block;overflow:hidden;aspect-ratio:var(--ar,3/4);background:radial-gradient(120% 90% at 50% 20%,#3a2415,#140c07 70%)}
+.ph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 16%}
+.ph::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 26px rgba(0,0,0,.55);pointer-events:none}
+.ph.is-missing>img{display:none}
+.ph.is-missing::before{content:var(--miss,"이미지를 찾을 수 없습니다") "\A" attr(data-file);white-space:pre-line;position:absolute;inset:0;display:grid;place-content:center;padding:12px;text-align:center;font-size:12px;line-height:1.6;color:var(--gold);opacity:.85}
+
+/* aged parchment */
+.paper{position:relative;color:var(--parch-ink);background:radial-gradient(130% 80% at 15% 0%,rgba(255,250,228,.6),transparent 60%),radial-gradient(90% 60% at 100% 100%,rgba(122,82,34,.3),transparent 62%),var(--tex-paper),linear-gradient(180deg,#e7d9b6,#d8c597);box-shadow:0 1px 0 rgba(255,255,255,.45) inset,0 26px 44px -18px rgba(0,0,0,.8),0 2px 0 rgba(0,0,0,.35)}
+.paper::before{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 55px rgba(116,74,26,.42),inset 0 0 6px rgba(70,42,14,.55)}
+
+/* ============ 4. LANDING ============ */
+.landing{position:fixed;inset:0;z-index:50;display:grid;place-items:center;overflow:hidden;background:#07050a}
+.landing-bg{position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;filter:saturate(.9) brightness(.8) contrast(1.05);transform:translate3d(var(--px,0px),var(--py,0px),0);transition:transform .8s var(--ease)}
+.landing-bg.is-missing{display:none}
+.landing-shade{position:absolute;inset:0;background:radial-gradient(75% 65% at 50% 46%,rgba(8,5,3,.04),rgba(8,5,3,.78) 100%),linear-gradient(180deg,rgba(8,5,3,.5),rgba(8,5,3,.04) 40%,rgba(8,5,3,.66))}
+.fog{position:absolute;left:-30%;width:160%;height:46%;pointer-events:none;will-change:transform;background:radial-gradient(40% 50% at 20% 50%,rgba(214,208,190,.28),transparent 70%),radial-gradient(34% 46% at 55% 40%,rgba(214,208,190,.22),transparent 70%),radial-gradient(38% 50% at 85% 55%,rgba(214,208,190,.26),transparent 70%)}
+.fog-a{bottom:-8%;opacity:.55;animation:drift 80s linear infinite alternate}
+.fog-b{bottom:16%;opacity:.3;animation:drift 110s linear infinite alternate-reverse}
+@keyframes drift{from{transform:translateX(-6%)}to{transform:translateX(6%)}}
+.landing-frame{position:absolute;inset:clamp(10px,2.2vw,28px);border:1px solid rgba(201,162,74,.6);box-shadow:inset 0 0 0 6px rgba(8,5,3,.5),inset 0 0 0 7px rgba(201,162,74,.28);pointer-events:none}
+.landing-frame i{position:absolute;width:13px;height:13px;background:var(--gold);transform:rotate(45deg);box-shadow:0 0 0 3px rgba(8,5,3,.9)}
+.landing-frame i:nth-child(1){left:-7px;top:-7px}
+.landing-frame i:nth-child(2){right:-7px;top:-7px}
+.landing-frame i:nth-child(3){left:-7px;bottom:-7px}
+.landing-frame i:nth-child(4){right:-7px;bottom:-7px}
+.landing-inner{position:relative;z-index:2;max-width:900px;padding:28px 24px;text-align:center}
+.landing.is-leaving .landing-inner{opacity:0;transform:scale(1.035);transition:opacity .9s var(--ease),transform 1.2s var(--ease)}
+.l-in{animation:lin 1.4s var(--ease) both;animation-delay:var(--d,0s)}
+@keyframes lin{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.l-agency{font-size:clamp(11px,1.6vw,15px);font-weight:700;letter-spacing:.5em;padding-left:.5em;color:var(--gold-hi);text-shadow:0 2px 10px #000}
+.l-rule{display:block;width:min(260px,60vw);height:auto;margin:clamp(12px,2.4vh,22px) auto;color:var(--gold)}
+.l-title{font-family:var(--f-display);font-weight:400;font-synthesis:none;font-size:clamp(46px,10.4vw,128px);line-height:.94;letter-spacing:.015em;background:linear-gradient(180deg,#fff0bd 0%,#e0b95c 38%,#8d6a1f 62%,#e7c978 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 rgba(0,0,0,.75)) drop-shadow(0 14px 26px rgba(0,0,0,.7))}
+.l-title span{display:block}
+.l-sub{margin-top:clamp(14px,2.6vh,24px);font-size:clamp(15px,2vw,20px);font-weight:700;letter-spacing:.32em;padding-left:.32em;color:var(--ivory);text-shadow:0 2px 12px #000}
+.enter{position:relative;margin-top:clamp(20px,4vh,34px);padding:16px clamp(34px,6vw,64px) 14px;color:#2a1b07;background:linear-gradient(180deg,#f2d98f,#c39a43 48%,#9a7428 52%,#e1bf6a);border:1px solid #3a2808;box-shadow:0 0 0 3px rgba(8,5,3,.85),0 0 0 4px var(--gold),0 16px 34px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.65);transition:filter .3s,box-shadow .3s,transform .15s}
+.enter:hover{filter:brightness(1.1);box-shadow:0 0 0 3px rgba(8,5,3,.85),0 0 0 4px var(--gold-hi),0 0 34px rgba(234,208,138,.45),0 16px 34px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.65)}
+.enter:active{transform:translateY(1px)}
+.enter:disabled{pointer-events:none}
+.enter-ko{display:block;font-weight:800;font-size:clamp(18px,2.4vw,24px);letter-spacing:.34em;padding-left:.34em}
+.enter-en{display:block;margin-top:2px;font-style:italic;font-size:clamp(12px,1.5vw,15px);letter-spacing:.22em;padding-left:.22em;opacity:.85}
+.l-note{margin-top:20px;font-size:13px;color:var(--ivory-dim);text-shadow:0 1px 8px #000}
+@media (max-height:560px){
+  .landing-inner{padding:14px 24px}
+  .l-title{font-size:clamp(34px,15vh,84px)}
+  .l-rule{margin:6px auto}
+  .l-sub{margin-top:8px}
+  .enter{margin-top:16px;padding-block:10px 8px}
+  .l-note{display:none}
+}
+
+/* ============ 5. CURTAIN TRANSITION ============ */
+.curtains{position:fixed;inset:0;z-index:90;overflow:hidden;pointer-events:none;--close-ms:1200ms;--open-ms:2200ms}
+.cur{position:absolute;top:0;bottom:0;width:50.4%;will-change:transform;background:linear-gradient(180deg,rgba(0,0,0,.6) 0,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 78%,rgba(0,0,0,.55) 100%),linear-gradient(180deg,#3a070e,#5c0f19 30%,#6f1420 55%,#430a12);box-shadow:0 0 60px rgba(0,0,0,.8);transition:transform var(--close-ms) cubic-bezier(.6,.04,.3,1)}
+.cur-l{left:0;transform-origin:left center;transform:translateX(-102%)}
+.cur-r{right:0;transform-origin:right center;transform:translateX(102%)}
+.cur-fold{position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.46) 0,rgba(0,0,0,0) 2.6%,rgba(255,80,80,.14) 4.8%,rgba(0,0,0,0) 6.6%,rgba(0,0,0,.46) 9.2%),repeating-linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.28) 3.4%,rgba(0,0,0,0) 7.4%,rgba(255,90,90,.08) 10.8%,rgba(0,0,0,0) 12.6%)}
+.cur::after{content:"";position:absolute;top:0;bottom:0;width:7px;background:linear-gradient(90deg,#7a5a1c,#e6c46c 45%,#7a5a1c);box-shadow:0 0 12px rgba(0,0,0,.6)}
+.cur-l::after{right:0}
+.cur-r::after{left:0}
+.cur-rod{position:absolute;left:0;right:0;top:0;z-index:2;height:clamp(30px,5.5vh,46px);background:linear-gradient(180deg,#f0d78e 0,#b8923f 20%,#74561a 58%,#3a2808 100%);box-shadow:0 10px 22px rgba(0,0,0,.7),inset 0 -2px 0 rgba(0,0,0,.45);transform:translateY(-105%);transition:transform .8s var(--ease)}
+.cur-rod i{position:absolute;top:50%;width:30px;height:30px;margin-top:-15px;border-radius:50%;background:radial-gradient(circle at 34% 28%,#fff2c2,#c9a24a 45%,#6f5319);box-shadow:0 3px 8px rgba(0,0,0,.6)}
+.cur-rod i:first-child{left:-6px}
+.cur-rod i:last-child{right:-6px}
+.curtains.is-closing .cur-l,.curtains.is-closing .cur-r,.curtains.is-closing .cur-rod{transform:none}
+.curtains.is-opening .cur{transition-duration:var(--open-ms);transition-timing-function:cubic-bezier(.65,.02,.2,1)}
+.curtains.is-opening .cur-l{transform:translateX(-74%) scaleX(.26)}
+.curtains.is-opening .cur-r{transform:translateX(74%) scaleX(.26)}
+.curtains.is-opening .cur-rod{transform:translateY(-105%);transition-delay:1.2s}
+
+/* ============ 6. HEADER (GNB) ============ */
+.gnb{position:sticky;top:0;z-index:40;background:linear-gradient(180deg,rgba(30,18,10,.97),rgba(18,11,7,.95));-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--gold-lo);box-shadow:0 1px 0 rgba(234,208,138,.18),0 10px 28px rgba(0,0,0,.55)}
+.gnb::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.55}
+.gnb-in{width:min(1280px,100% - 32px);min-height:76px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;font-size:22px;color:var(--gold-hi);background:radial-gradient(circle at 35% 30%,#4a2c14,#1a0f08);box-shadow:0 0 0 1px var(--gold),0 0 0 4px #1a0f08,0 0 0 5px var(--gold-lo)}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text b{font-family:var(--f-display);font-weight:400;font-synthesis:none;font-size:22px;letter-spacing:.07em;color:var(--gold-hi)}
+.brand-text i{font-size:12px;letter-spacing:.1em;color:var(--ivory-dim)}
+.nav{display:flex;align-items:stretch}
+.nav a{position:relative;display:flex;flex-direction:column;align-items:center;padding:6px clamp(14px,2.2vw,30px);text-decoration:none;color:var(--ivory-dim);transition:color .25s}
+.nav a+a::before{content:"";position:absolute;left:0;top:16%;bottom:16%;width:1px;background:linear-gradient(180deg,transparent,var(--gold),transparent);opacity:.65}
+.nav a::after{content:"";position:absolute;left:28%;right:28%;bottom:-2px;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .35s var(--ease)}
+.nav .ko{font-weight:800;font-size:16px;line-height:1.4;letter-spacing:.06em}
+.nav .en{font-style:italic;font-size:12px;line-height:1.2;letter-spacing:.14em;opacity:.85}
+.nav a:hover,.nav a.is-on{color:var(--gold-hi)}
+.nav a.is-on::after{transform:scaleX(1)}
+
+/* antique audio controller */
+.audio{display:flex;align-items:center;gap:10px;padding:7px 16px 7px 14px;border-radius:999px;background:linear-gradient(180deg,#2d1b0f,#170d07);box-shadow:0 0 0 1px var(--gold-lo),0 0 0 3px #120b06,0 0 0 4px rgba(184,146,63,.5),inset 0 1px 0 rgba(255,235,170,.12),0 6px 14px rgba(0,0,0,.5)}
+.eq{display:flex;align-items:flex-end;gap:2px;width:18px;height:16px;opacity:.5}
+.eq i{flex:1;height:26%;background:var(--gold);border-radius:1px}
+.audio.is-playing .eq{opacity:1}
+.audio.is-playing .eq i{animation:eq 1s ease-in-out infinite alternate}
+.audio.is-playing .eq i:nth-child(2){animation-duration:.8s;animation-delay:-.3s}
+.audio.is-playing .eq i:nth-child(3){animation-duration:1.15s;animation-delay:-.6s}
+.audio.is-playing .eq i:nth-child(4){animation-duration:.9s;animation-delay:-.1s}
+@keyframes eq{from{height:22%}to{height:100%}}
+.brass{display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:50%;font-size:18px;color:#2a1a08;background:radial-gradient(circle at 34% 28%,#fff0b8 0,#e0bb5f 30%,#a07a2c 62%,#6f5319 100%);box-shadow:0 0 0 1px #2a1c08,0 3px 6px rgba(0,0,0,.6),inset 0 1px 1px rgba(255,255,255,.7),inset 0 -2px 3px rgba(60,38,6,.5);transition:filter .2s,transform .1s}
+.brass:hover{filter:brightness(1.12)}
+.brass:active{transform:translateY(1px)}
+.brass-sm{width:32px;height:32px;font-size:16px}
+.brass[aria-pressed="true"]{filter:brightness(.72) saturate(.8)}
+.vol{display:block;width:clamp(72px,9vw,112px)}
+.vol input{--v:50%;-webkit-appearance:none;appearance:none;display:block;width:100%;height:18px;margin:0;background:transparent;cursor:pointer}
+.vol input::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--gold) 0 var(--v),#0c0704 var(--v) 100%);box-shadow:inset 0 1px 2px rgba(0,0,0,.9),0 0 0 1px rgba(184,146,63,.45)}
+.vol input::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;margin-top:-5px;border-radius:50%;background:radial-gradient(circle at 34% 28%,#fff0b8,#d5ae55 45%,#7a5a1c);box-shadow:0 0 0 1px #2a1c08,0 2px 4px rgba(0,0,0,.7)}
+.vol input::-moz-range-track{height:6px;border-radius:3px;background:#0c0704;box-shadow:inset 0 1px 2px rgba(0,0,0,.9),0 0 0 1px rgba(184,146,63,.45)}
+.vol input::-moz-range-progress{height:6px;border-radius:3px;background:var(--gold)}
+.vol input::-moz-range-thumb{width:14px;height:14px;border:0;border-radius:50%;background:radial-gradient(circle at 34% 28%,#fff0b8,#d5ae55 45%,#7a5a1c);box-shadow:0 0 0 1px #2a1c08,0 2px 4px rgba(0,0,0,.7)}
+.audio.is-muted .vol{opacity:.5}
+
+@media (max-width:860px){
+  :root{--hh:116px}
+  .gnb-in{flex-wrap:wrap;row-gap:0;min-height:0;padding-top:9px}
+  .brand-text i{display:none}
+  .gnb-tools{order:2;margin-left:auto}
+  .nav{order:3;width:100%;margin-top:8px;border-top:1px solid rgba(184,146,63,.25)}
+  .nav a{flex:1;padding:6px 4px 9px}
+  .nav a::after{bottom:0}
+}
+@media (max-width:430px){
+  .brand-text{display:none}
+  .gnb-tools{gap:8px}
+  .lang button{padding:4px 6px;font-size:12px}
+  .eq{display:none}
+  .vol{width:68px}
+  .audio{gap:8px;padding:6px 13px 6px 8px}
+  .brand-text b{font-size:19px}
+  .nav .ko{font-size:15px}
+}
+
+/* ============ 7. TOAST / FOOTER ============ */
+.toast{position:fixed;left:50%;bottom:22px;z-index:120;max-width:min(92vw,520px);padding:12px 18px;font-size:14px;line-height:1.6;color:var(--ivory);background:#1a0f08;border:1px solid var(--gold);box-shadow:0 0 0 3px #0c0704,0 14px 30px rgba(0,0,0,.6);opacity:0;pointer-events:none;transform:translate(-50%,20px);transition:opacity .3s,transform .3s var(--ease)}
+.toast.is-on{opacity:1;transform:translate(-50%,0)}
+.foot{padding:56px 0 64px;text-align:center;background:linear-gradient(180deg,transparent,rgba(0,0,0,.6));border-top:1px solid rgba(184,146,63,.25)}
+.foot-rule{display:block;width:220px;height:auto;margin:0 auto 14px;color:var(--gold)}
+.foot-title{font-family:var(--f-display);font-size:22px;letter-spacing:.08em;color:var(--gold-hi)}
+.foot-note{margin-top:6px;font-size:14px;color:var(--ivory-dim)}
+.foot-top{display:inline-flex;align-items:center;gap:6px;margin-top:22px;padding:9px 18px;font-size:14px;text-decoration:none;color:var(--gold-hi);border:1px solid var(--gold-lo);transition:background .2s}
+.foot-top:hover{background:rgba(184,146,63,.16)}
+/* ============ 8. SECTION COMMON ============ */
+.section{position:relative;padding:clamp(64px,10vw,120px) 0}
+.sec-head{margin-bottom:clamp(36px,6vw,64px);text-align:center}
+.sec-title{font-family:var(--f-display);font-weight:800;font-synthesis:none;font-size:clamp(34px,5.6vw,60px);line-height:1.2;letter-spacing:.06em;color:var(--ivory);text-shadow:0 2px 0 #000,0 10px 30px rgba(0,0,0,.6)}
+.sec-rule{display:block;width:200px;height:auto;margin:14px auto 12px;color:var(--gold)}
+.sec-lead{max-width:34em;margin-inline:auto;font-size:clamp(15px,1.7vw,18px);color:var(--ivory-dim)}
+.link{display:inline;margin-top:14px;padding:0;font-weight:700;font-size:15px;text-align:left;color:var(--oxblood);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px;transition:color .2s}
+.link:hover{color:#a3202c}
+.nav-btn{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding:9px 16px;font-weight:700;font-size:15px;color:var(--gold-hi);background:linear-gradient(180deg,#34200f,#1d1108);border:1px solid var(--gold-lo);box-shadow:inset 0 1px 0 rgba(255,235,170,.14);transition:background .2s,border-color .2s}
+.nav-btn:hover{border-color:var(--gold);background:linear-gradient(180deg,#432a14,#26160a)}
+.stamp{display:inline-block;padding:3px 14px 2px;font-weight:800;font-size:clamp(17px,2.2vw,24px);letter-spacing:.2em;color:var(--oxblood);border:3px double var(--oxblood);transform:rotate(7deg);opacity:.85;mix-blend-mode:multiply}
+#app:focus{outline:none}
+
+/* ============ 9. WORLD ============ */
+.world-top{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(280px,1fr);gap:clamp(24px,3.4vw,44px);align-items:start}
+.folder{position:relative;margin-top:30px;padding:clamp(10px,1.6vw,16px);background:linear-gradient(135deg,#5e3b22,#3a2213 60%,#2a190d);border:1px solid #160b04;box-shadow:0 30px 50px -20px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,220,160,.18),inset 0 0 0 3px rgba(0,0,0,.25)}
+.folder-tab{position:absolute;left:22px;top:-30px;padding:6px 22px 4px;font-weight:800;font-size:14px;letter-spacing:.1em;color:var(--gold-hi);background:linear-gradient(180deg,#5e3b22,#3e2415);border:1px solid #160b04;border-bottom:0;border-radius:7px 7px 0 0}
+.sheet{padding:clamp(28px,4.4vw,52px) clamp(22px,4.6vw,56px) clamp(30px,4.6vw,54px)}
+.sheet .stamp{position:absolute;top:clamp(16px,3vw,34px);right:clamp(16px,3vw,38px)}
+.doc-title{margin-bottom:1em;padding-bottom:.5em;font-family:var(--f-display);font-weight:800;font-synthesis:none;font-size:clamp(26px,3.6vw,40px);line-height:1.25;color:#1d1209;border-bottom:4px double rgba(37,24,13,.7)}
+.doc-title small{margin-left:.6em;font-family:var(--f-text);font-weight:400;font-style:italic;font-size:.42em;letter-spacing:.06em;color:var(--parch-mute)}
+.sheet p{font-size:clamp(16px,1.5vw,18px);line-height:1.95}
+.sheet p+p{margin-top:1.1em}
+.pull{margin:1.7em 0;padding:.3em 0 .3em 1.2em;border-left:3px solid var(--oxblood);font-weight:700;font-size:clamp(18px,2vw,22px);line-height:1.7;color:#3a0d12}
+.side{display:grid;gap:30px;margin-top:30px}
+.slip{padding:24px 22px 22px;color:var(--parch-ink);background:linear-gradient(180deg,#eadfbf,#dccb9f);border-top:3px dashed rgba(37,24,13,.45);border-bottom:3px dashed rgba(37,24,13,.45);box-shadow:0 22px 36px -16px rgba(0,0,0,.8);transform:rotate(.8deg)}
+.slip h3{font-weight:800;font-size:19px;color:#1d1209}
+.facts{margin-top:8px}
+.facts div{display:grid;grid-template-columns:4.6em 1fr;gap:10px;padding:9px 0;border-bottom:1px dotted rgba(37,24,13,.4)}
+.facts div:last-child{border-bottom:0}
+.facts dt{font-weight:800;font-size:15px;color:var(--oxblood)}
+.facts dd{font-size:15px;line-height:1.65}
+
+/* 아르덴 런던의 하루 */
+.dn{padding:20px 20px 22px;background:linear-gradient(180deg,#2c1b10,#1c110a);border:1px solid var(--gold-lo);box-shadow:0 22px 36px -16px rgba(0,0,0,.85),inset 0 0 0 3px rgba(0,0,0,.35),inset 0 0 0 4px rgba(184,146,63,.25)}
+.dn-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.dn-head h3{font-weight:800;font-size:17px;color:var(--gold-hi)}
+.seg{display:inline-flex;border:1px solid var(--gold-lo)}
+.seg button{padding:4px 15px;font-weight:700;font-size:14px;color:var(--ivory-dim);transition:background .3s,color .3s}
+.seg button[aria-pressed="true"]{background:var(--gold);color:#241505}
+.dn-view{position:relative;aspect-ratio:3/2;overflow:hidden;box-shadow:0 0 0 1px #000,0 0 0 4px var(--gold-lo)}
+.dn-sky{position:absolute;inset:0;transition:opacity 1.2s}
+.dn-day{background:radial-gradient(circle at 22% 26%,rgba(255,250,225,.95) 0 9px,rgba(255,240,190,.35) 10px 26px,transparent 28px),linear-gradient(180deg,#cfc2a2,#eadfc2 65%,#e2d4ae)}
+.dn-night{background:radial-gradient(circle at 80% 22%,#f4efd6 0 7px,rgba(244,239,214,.25) 8px 22px,transparent 24px),linear-gradient(180deg,#05070f,#121729 62%,#2b2736)}
+.dn[data-mode="night"] .dn-day,.dn[data-mode="day"] .dn-night{opacity:0}
+.dn-city{position:absolute;left:0;bottom:0;width:100%;height:auto;color:#050507;transition:color 1.2s}
+.dn[data-mode="day"] .dn-city{color:#6c6252}
+.dn-face{fill:#f1dc9a;opacity:.2;transition:opacity 1.2s}
+.dn-win{fill:#ffd57a;opacity:0;transition:opacity 1.2s}
+.dn[data-mode="night"] .dn-face{opacity:.95}
+.dn[data-mode="night"] .dn-win{opacity:.9}
+.dn-lamp{position:absolute;bottom:16%;width:46px;height:46px;margin-left:-23px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,120,.95) 0 3px,rgba(255,190,80,.35) 4px,transparent 22px);opacity:0;transition:opacity 1.2s}
+.dn[data-mode="night"] .dn-lamp{opacity:1;animation:flick 3.4s steps(1) infinite}
+.dn-lamp+.dn-lamp{animation-delay:-1.3s!important}
+@keyframes flick{0%,100%{opacity:1}46%{opacity:.78}50%{opacity:1}82%{opacity:.88}}
+.dn-mist{position:absolute;left:-10%;right:-10%;bottom:0;height:62%;background:radial-gradient(60% 70% at 30% 80%,rgba(220,214,196,.5),transparent 70%),radial-gradient(60% 70% at 78% 85%,rgba(220,214,196,.45),transparent 70%);opacity:.85;transition:opacity 1.2s}
+.dn[data-mode="day"] .dn-mist{opacity:.22}
+.dn-text{min-height:6.6em;margin-top:16px;font-size:15px;line-height:1.8;color:var(--ivory)}
+.dn .link{margin-top:2px;color:var(--gold-hi)}
+
+/* 제국을 움직이는 힘 */
+.sub-head{margin:clamp(56px,8vw,96px) 0 clamp(26px,4vw,42px);text-align:center;font-weight:800;font-size:clamp(22px,3vw,30px);letter-spacing:.08em;color:var(--ivory);text-shadow:0 2px 0 #000}
+.powers{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3.4vw,40px);align-items:start}
+.pw h4{font-family:var(--f-display);font-weight:800;font-synthesis:none;font-size:clamp(21px,2.4vw,27px);line-height:1.3}
+.pw h4 small{display:block;font-family:var(--f-text);font-weight:400;font-style:italic;font-size:13px;letter-spacing:.06em;opacity:.7}
+.pw p{margin-top:.7em;font-size:16px;line-height:1.9}
+.pw-club{grid-column:1/6;padding:32px 28px 28px;color:#e6cf93;background:radial-gradient(120% 100% at 20% 0%,#2b2321,#0f0b0a 70%);box-shadow:inset 0 0 0 5px #0a0707,inset 0 0 0 6px rgba(201,162,74,.65),inset 0 0 0 10px #0a0707,inset 0 0 0 11px rgba(201,162,74,.3),0 28px 44px -18px rgba(0,0,0,.9)}
+.pw-club h4{color:var(--gold-hi)}
+.pw-club .ic{margin-bottom:10px;font-size:30px;color:var(--gold)}
+.pw-club .link{color:var(--gold-hi)}
+.pw-club .link:hover{color:#fff1c2}
+.pw-rpd{grid-column:6/13;padding:38px clamp(22px,3.4vw,40px) 30px}
+.pw-rpd::after{content:"";position:absolute;left:0;right:0;top:0;height:12px;background:repeating-linear-gradient(90deg,#1b1410 0 14px,#3b2a1b 14px 28px)}
+.pw-rpd p{background:repeating-linear-gradient(180deg,transparent 0,transparent calc(1.9em - 1px),rgba(37,24,13,.2) calc(1.9em - 1px),rgba(37,24,13,.2) 1.9em)}
+.pw-agency{grid-column:1/8;padding:32px clamp(22px,3.4vw,42px) 30px}
+.checks{display:grid;gap:9px;margin-top:16px}
+.checks li{position:relative;padding-left:34px;font-weight:700;font-size:16px}
+.checks li::before{content:"";position:absolute;left:0;top:.3em;width:20px;height:20px;border:2px solid var(--parch-ink);background:rgba(255,255,255,.2)}
+.checks li::after{content:"";position:absolute;left:6px;top:.1em;width:7px;height:15px;border:solid var(--oxblood);border-width:0 3px 3px 0;transform:rotate(40deg)}
+.pw-white{grid-column:8/13;padding:34px 26px 28px;color:#1d1812;background:var(--tex-paper),linear-gradient(180deg,#cbc2a8,#b4aa8d);transform:rotate(-1.4deg);clip-path:polygon(0 3%,6% 0,14% 2.5%,23% .5%,33% 2.5%,44% 0,55% 2%,66% .5%,78% 2.5%,90% 0,100% 2%,100% 100%,0 100%)}
+.pw-white h4{font-size:clamp(28px,3.4vw,40px);line-height:1.15}
+.pw-white .link{color:#5c0f16}
+
+@media (max-width:980px){
+  .world-top{grid-template-columns:1fr}
+  .side{grid-template-columns:1fr 1fr;align-items:start}
+  .pw-club,.pw-rpd,.pw-agency,.pw-white{grid-column:1/-1}
+}
+@media (max-width:640px){
+  .side{grid-template-columns:1fr}
+  .folder-tab{left:14px}
+  .sheet .stamp{position:static;display:block;width:max-content;margin:0 0 12px auto}
+  .doc-title small{display:block;margin:.2em 0 0}
+}
+/* ============ 10. CHARACTERS ============ */
+.chars{background:radial-gradient(90% 50% at 50% 0%,rgba(0,0,0,.5),transparent 70%),repeating-linear-gradient(90deg,rgba(107,18,26,0) 0 46px,rgba(107,18,26,.17) 46px 50px,rgba(0,0,0,0) 50px 96px),linear-gradient(180deg,#1b0f0a,#2a1510 50%,#1b0f0a);box-shadow:inset 0 26px 40px -22px #000,inset 0 -26px 40px -22px #000}
+.roster{position:relative;display:flex;justify-content:center;gap:clamp(10px,1.6vw,22px);margin-bottom:clamp(30px,4.6vw,52px);padding:10px 4px 14px}
+.tab{flex:0 1 142px;min-width:0;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;transition:transform .35s var(--ease)}
+.tab .frame{width:100%;padding:6px;filter:brightness(.5) saturate(.65);transition:filter .35s,box-shadow .35s}
+.tab .frame::after{inset:3px}
+.tab:hover .frame{filter:brightness(.85) saturate(.9)}
+.tab[aria-selected="true"]{transform:translateY(-6px)}
+.tab[aria-selected="true"] .frame{filter:none;box-shadow:0 0 0 1px #2a1c08,0 0 30px rgba(234,208,138,.42),0 18px 30px -8px rgba(0,0,0,.85)}
+.tab-plate{display:block;width:100%;padding:5px 6px 4px;line-height:1.3;color:var(--ivory-dim);background:linear-gradient(180deg,#3a2412,#241408);border:1px solid var(--gold-lo);transition:background .3s,color .3s}
+.tab-first{display:block;font-weight:800;font-size:15px}
+.tab-role{display:block;font-size:12px;opacity:.85}
+.tab:hover .tab-plate{color:var(--ivory)}
+.tab[aria-selected="true"] .tab-plate{color:#261705;background:linear-gradient(180deg,#f0d78e,#b8923f);border-color:#3a2808}
+
+.dossier{display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);gap:clamp(24px,4vw,52px);align-items:start;animation:turn .6s var(--ease) both}
+@keyframes turn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.portrait{position:sticky;top:calc(var(--hh) + 18px)}
+.portrait .frame{padding:clamp(10px,1.6vw,16px)}
+.zoom{position:absolute;right:clamp(18px,2.6vw,28px);bottom:clamp(18px,2.6vw,28px);z-index:2;display:grid;place-items:center;width:40px;height:40px;font-size:18px;color:var(--gold-hi);background:rgba(12,8,5,.8);border:1px solid var(--gold);transition:background .2s}
+.zoom:hover{background:rgba(70,44,16,.92)}
+.plate{width:88%;margin:16px auto 0;padding:10px 12px 9px;text-align:center;color:#2a1a08;background:linear-gradient(180deg,#e9cf86,#b8923f 45%,#8a6a26);border:1px solid #3a2808;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 6px 12px rgba(0,0,0,.5)}
+.plate strong{display:block;font-weight:800;font-size:18px;line-height:1.3}
+.plate em{display:block;font-size:13px;opacity:.85}
+
+.file{padding:clamp(26px,4vw,48px) clamp(22px,4vw,48px) clamp(28px,4vw,46px)}
+.file-head+.blk{margin-top:0}
+.file-head{margin-bottom:1.4em;padding-bottom:.9em;border-bottom:4px double rgba(37,24,13,.7)}
+.file-name{font-family:var(--f-display);font-weight:800;font-synthesis:none;font-size:clamp(27px,3.6vw,38px);line-height:1.2;color:#1d1209}
+.file-en{font-style:italic;font-size:15px;color:var(--parch-mute)}
+.file-line{margin-top:.6em;font-weight:700;font-size:16px;line-height:1.7;color:#3a0d12}
+.ledger{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(37,24,13,.5);background:rgba(255,255,255,.14)}
+.ledger div{padding:10px 14px;border-right:1px solid rgba(37,24,13,.35)}
+.ledger div:nth-child(4){border-right:0}
+.ledger .wide{grid-column:1/-1;border-right:0;border-top:1px solid rgba(37,24,13,.35)}
+.ledger dt{font-size:13px;line-height:1.5;color:var(--parch-mute)}
+.ledger dd{font-weight:800;font-size:17px;line-height:1.45}
+.blk{margin-top:1.8em}
+.blk h4{display:flex;align-items:center;gap:12px;margin-bottom:.7em;font-weight:800;font-size:19px;color:#1d1209}
+.blk h4::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(37,24,13,.55),transparent)}
+.blk .stamp{order:2;font-size:15px;letter-spacing:.14em;padding:1px 10px 0;border-width:2px;transform:rotate(-4deg)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:0 36px}
+.bul li{position:relative;padding:.2em 0 .2em 1.5em;font-size:16px;line-height:1.75}
+.bul li::before{content:"";position:absolute;left:.15em;top:1em;width:7px;height:7px;background:var(--oxblood);transform:rotate(45deg)}
+.rel{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:1.9em;padding-top:1.1em;border-top:1px dashed rgba(37,24,13,.45)}
+.rel-label{margin-right:2px;font-weight:800;font-size:14px;color:var(--parch-mute)}
+.rel-label:not(:first-child){margin-left:14px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:4px 13px 4px 5px;font-weight:700;font-size:14px;color:#2a1a0c;background:rgba(255,255,255,.28);border:1px solid rgba(37,24,13,.5);transition:background .2s}
+.chip:hover{background:rgba(255,255,255,.6)}
+.chip .ava{position:relative;display:block;width:24px;height:24px;overflow:hidden;border-radius:50%;background:#2a1a0c}
+.chip .ava img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 14%}
+.chip .ic{width:24px;height:24px;padding:4px;color:var(--parch-ink)}
+.stage-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:clamp(30px,4.6vw,48px)}
+.count{min-width:4.6em;font-weight:700;text-align:center;color:var(--ivory-dim)}
+
+/* 이미지 확대 */
+.lightbox{position:fixed;inset:0;z-index:110;display:grid;place-items:center;padding:clamp(16px,4vw,48px);background:rgba(6,4,3,.93);animation:fade .3s both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.lb-fig{display:flex;flex-direction:column;align-items:center;max-height:100%}
+.lb-fig img{width:auto;height:auto;max-width:min(92vw,900px);max-height:calc(100vh - 140px);max-height:calc(100dvh - 140px);object-fit:contain;border:1px solid var(--gold);box-shadow:0 0 0 6px #120b06,0 0 0 7px var(--gold-lo),0 30px 60px rgba(0,0,0,.8)}
+.lb-fig figcaption{margin-top:18px;font-weight:700;color:var(--gold-hi)}
+
+@media (max-width:1000px){
+  .roster{justify-content:flex-start;gap:12px;overflow-x:auto;margin-inline:-20px;padding-inline:20px;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--gold-lo) transparent}
+  .tab{flex:0 0 112px;scroll-snap-align:center}
+}
+@media (max-width:820px){
+  .dossier{grid-template-columns:1fr}
+  .portrait{position:static;width:min(320px,82%);margin-inline:auto}
+  .cols{grid-template-columns:1fr}
+  .ledger{grid-template-columns:repeat(2,1fr)}
+  .ledger div:nth-child(2){border-right:0}
+  .ledger div:nth-child(n+3){border-top:1px solid rgba(37,24,13,.35)}
+}
+/* ============ 11. LOCATIONS ============ */
+.locs{background:linear-gradient(180deg,rgba(0,0,0,.4),transparent 28%)}
+.map-frame{margin-bottom:clamp(48px,7vw,80px)}
+.map{width:100%;aspect-ratio:1000/640;overflow:hidden}
+.map-svg{position:absolute;inset:0;display:block;width:100%;height:100%}
+.m-title{font-family:var(--f-display);font-size:21px;letter-spacing:.06em;fill:#2a1b0d}
+.m-sub{font-family:var(--f-text);font-style:italic;font-size:13px;fill:#4a3520}
+.m-n{font-family:var(--f-display);font-size:15px;fill:#2a1b0d}
+.pins{position:absolute;inset:0}
+.pin{position:absolute;z-index:2;display:grid;place-items:center;width:46px;height:46px;transform:translate(-50%,-50%);border-radius:50%}
+.pin-core{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-size:18px;color:#2a1a08;background:radial-gradient(circle at 34% 28%,#fff0b8,#e0bb5f 32%,#a07a2c 66%,#6f5319);box-shadow:0 0 0 2px #2a1c08,0 0 0 3px var(--gold-hi),0 6px 10px rgba(0,0,0,.55);transition:transform .25s var(--ease),box-shadow .25s}
+.pin:hover .pin-core,.pin:focus-visible .pin-core,.pin.is-hot .pin-core{transform:scale(1.18);box-shadow:0 0 0 2px #2a1c08,0 0 0 3px #fff3c2,0 0 22px rgba(255,220,130,.8),0 8px 14px rgba(0,0,0,.6)}
+.pin-no{position:absolute;right:-1px;top:-1px;display:grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border-radius:9px;font-weight:800;font-size:11px;line-height:1;color:#f6e7bd;background:var(--oxblood);box-shadow:0 0 0 1.5px #2a0a0d}
+.pin-label{position:absolute;left:50%;top:calc(100% - 3px);padding:2px 10px 1px;white-space:nowrap;transform:translateX(-50%);font-weight:800;font-size:13px;line-height:1.55;color:#f3e5bb;background:rgba(24,14,8,.93);border:1px solid var(--gold-lo);opacity:0;pointer-events:none;transition:opacity .2s}
+.pin:hover .pin-label,.pin:focus-visible .pin-label,.pin.is-hot .pin-label{opacity:1;z-index:3}
+@media (min-width:900px){.pin-label{opacity:1}}
+
+.loc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(26px,3.4vw,44px) clamp(18px,2.4vw,30px)}
+.loc{min-width:0}
+.loc-open{display:flex;flex-direction:column;width:100%;gap:14px;text-align:left}
+.loc-open .frame{padding:9px;transition:box-shadow .3s}
+.loc-open .frame::after{inset:4px}
+.loc-open:hover .frame,.loc.is-hot .frame{box-shadow:0 0 0 1px #2a1c08,0 0 28px rgba(234,208,138,.38),0 18px 36px -10px rgba(0,0,0,.75)}
+.loc-no{position:absolute;left:-6px;top:-6px;z-index:2;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;font-weight:800;font-size:14px;color:#f6e7bd;background:var(--oxblood);box-shadow:0 0 0 2px #2a0a0d,0 0 0 3px var(--gold)}
+.loc-plaque{display:block;margin:-4px 7% 0;padding:7px 10px 6px;text-align:center;color:#2a1a08;background:linear-gradient(180deg,#e9cf86,#b8923f 45%,#8a6a26);border:1px solid #3a2808;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 6px 12px rgba(0,0,0,.5)}
+.loc-name{display:block;font-weight:800;font-size:17px;line-height:1.35}
+.loc-en{display:block;font-style:italic;font-size:12.5px;opacity:.85}
+.loc-sum{display:block;font-size:14.5px;line-height:1.75;color:var(--ivory-dim)}
+
+/* 지역 상세 모달 */
+.modal{--mpad:clamp(10px,3vw,32px);position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:var(--mpad)}
+.modal-back{position:absolute;inset:0;background:rgba(6,4,3,.86);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);animation:fade .35s both}
+.modal-card{position:relative;display:flex;width:min(1080px,100%);max-height:calc(100vh - 2*var(--mpad));max-height:calc(100dvh - 2*var(--mpad));animation:rise .55s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(26px) scale(.965)}to{opacity:1;transform:none}}
+.modal-scroll{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);width:100%;min-height:0;overflow:auto;overscroll-behavior:contain;background:var(--tex-wood),linear-gradient(135deg,#2c1a0f,#160d07);border:1px solid var(--gold);box-shadow:0 0 0 4px #0c0704,0 0 0 5px var(--gold-lo),0 40px 80px rgba(0,0,0,.8)}
+.modal-left{display:flex;flex-direction:column;gap:24px;align-self:start;min-width:0;padding:clamp(20px,3.2vw,38px)}
+.modal-media{display:block}
+.modal-index ol{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px}
+.modal-index button{display:flex;align-items:center;gap:9px;width:100%;padding:6px 8px;text-align:left;font-size:14px;line-height:1.4;color:var(--ivory-dim);border:1px solid transparent;transition:color .2s,background .2s}
+.modal-index button:hover{color:var(--gold-hi);background:rgba(184,146,63,.12)}
+.modal-index button[aria-current="true"]{font-weight:800;color:#241505;background:linear-gradient(180deg,#f0d78e,#b8923f);border-color:#3a2808}
+.modal-index .n{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;font-weight:800;font-size:12px;line-height:1;color:#f6e7bd;background:var(--oxblood);box-shadow:0 0 0 1px #2a0a0d}
+.modal-doc{min-width:0;padding:clamp(28px,4vw,46px) clamp(22px,4vw,44px) clamp(24px,3vw,34px);animation:unroll .8s var(--ease) .12s both}
+@keyframes unroll{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+.modal-x{position:absolute;top:14px;right:14px;z-index:5;display:grid;place-items:center;width:42px;height:42px;font-size:20px;color:var(--gold-hi);background:rgba(12,8,5,.88);border:1px solid var(--gold);border-radius:50%;transition:background .2s,transform .3s var(--ease)}
+.modal-x:hover{background:#3a2412;transform:rotate(90deg)}
+.modal-title{padding-right:44px;font-family:var(--f-display);font-weight:800;font-synthesis:none;font-size:clamp(28px,4vw,42px);line-height:1.2;color:#1d1209}
+.modal-en{font-style:italic;font-size:16px;color:var(--parch-mute)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px}
+.tags li{padding:1px 12px;font-weight:700;font-size:13.5px;line-height:1.7;color:#3a0d12;background:rgba(107,18,26,.07);border:1px solid rgba(107,18,26,.55)}
+.tags .is-place{color:#f3e2b4;background:var(--oxblood);border-color:var(--oxblood)}
+.modal-text p{font-size:17px;line-height:1.95}
+.modal-text p+p{margin-top:1em}
+.modal-rel{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:1.6em;padding-top:1em;border-top:1px dashed rgba(37,24,13,.45)}
+.modal-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:1.8em;padding-top:1.1em;border-top:4px double rgba(37,24,13,.55)}
+.modal-nav .count{color:var(--parch-mute)}
+
+@media (max-width:1000px){
+  .loc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:820px){
+  .modal-scroll{grid-template-columns:1fr}
+  .modal-left{padding-bottom:0}
+  .modal-index{display:none}
+  .modal-doc{animation-name:rise}
+  .modal-doc{padding-bottom:0}
+  .modal-nav{position:sticky;bottom:0;z-index:3;margin:1.4em calc(-1 * clamp(22px,4vw,44px)) 0;padding:12px clamp(22px,4vw,44px);background:#dac89b;box-shadow:0 -12px 16px -10px rgba(60,38,10,.4)}
+}
+@media (max-width:560px){
+  .stage-nav{gap:10px}
+  .stage-nav .nav-btn{padding:9px 12px}
+  .loc-plaque{margin-inline:2%;padding-inline:6px}
+  .loc-en{font-size:11.5px}
+  .pin{width:44px;height:44px}
+  .pin-core{width:28px;height:28px;font-size:15px}
+  .pin-no{min-width:16px;height:16px;font-size:10px}
+  .loc-grid{gap:30px 14px}
+  .loc-name{font-size:15px}
+  .loc-sum{font-size:13.5px}
+  .modal-nav .nav-btn span{font-size:14px}
+  .modal-nav .nav-btn{padding:8px 11px}
+}
+/* ============ 13. LANGUAGE ============ */
+.l-lang{margin-top:clamp(16px,3vh,28px)}
+.l-lang-label{font-style:italic;font-size:clamp(12px,1.5vw,14px);letter-spacing:.06em;color:var(--gold-hi);text-shadow:0 2px 10px #000}
+.l-lang-btns{display:inline-flex;margin-top:10px;background:rgba(8,5,3,.55);border:1px solid rgba(201,162,74,.7);box-shadow:0 0 0 3px rgba(8,5,3,.6),0 0 0 4px rgba(201,162,74,.3)}
+.l-lang-btns button{padding:7px clamp(14px,2.6vw,26px) 6px;font-weight:700;font-size:15px;color:var(--ivory-dim);transition:color .2s,background .2s}
+.l-lang-btns button+button{border-left:1px solid rgba(201,162,74,.45)}
+.l-lang-btns button:hover{color:var(--gold-hi)}
+.l-lang-btns button[aria-pressed="true"]{color:#2a1b07;background:linear-gradient(180deg,#f2d98f,#b8923f)}
+.gnb-tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:14px}
+.lang{display:inline-flex;align-items:center}
+.lang button{padding:5px 9px 4px;font-weight:800;font-size:13px;letter-spacing:.08em;color:var(--ivory-dim);transition:color .2s}
+.lang button+button{border-left:1px solid rgba(184,146,63,.5)}
+.lang button:hover{color:var(--gold-hi)}
+.lang button[aria-pressed="true"]{color:var(--gold-hi);text-shadow:0 0 10px rgba(234,208,138,.45);box-shadow:inset 0 -2px 0 var(--gold)}
+.enter-en:empty,.doc-title small:empty,.pw h4 small:empty,.file-en:empty,.plate em:empty,.loc-en:empty,.modal-en:empty{display:none}
+html[lang="ja"]{--f-text:'Shippori Mincho','Noto Serif JP','Hiragino Mincho ProN','Yu Mincho',serif;--f-display:'Abril Fatface','Shippori Mincho','Noto Serif JP','Hiragino Mincho ProN','Yu Mincho',serif}
+html[lang="en"] body,html[lang="ja"] body{word-break:normal;line-break:strict}
+html[lang="en"] .facts div{grid-template-columns:6.2em 1fr}
+html[lang="ja"] .facts div{grid-template-columns:5em 1fr}
+html:not([lang="ko"]) .l-sub{letter-spacing:.14em;padding-left:.14em}
+html[lang="en"] .enter-ko{letter-spacing:.14em;padding-left:.14em}
+html[lang="ja"] .enter-ko{letter-spacing:.3em;padding-left:.3em}
+html:not([lang="ko"]) .stamp{letter-spacing:.1em}
+@media (max-height:560px){.l-lang{margin-top:8px}.l-lang-label{display:none}.l-lang-btns{margin-top:0}}
+
+/* ============ 12. SCROLL REVEAL ============ */
+.js-rv .rv{opacity:0;translate:0 28px;transition:opacity 1s var(--ease),translate 1s var(--ease);transition-delay:var(--rd,0s)}
+.js-rv .rv.in{opacity:1;translate:0 0}
+/* ===== 스크롤바 숨김 (스크롤·터치 드래그는 그대로 동작) ===== */
+html,body,*{scrollbar-width:none!important;-ms-overflow-style:none!important}
+html::-webkit-scrollbar,body::-webkit-scrollbar,*::-webkit-scrollbar{display:none!important;width:0!important;height:0!important;background:transparent!important}
+
+/* ===== 지역 모달 전환 (페이드 + 슬라이드) ===== */
+.modal-media,.modal-doc>:not(.modal-nav){transition:opacity .34s ease,translate .42s var(--ease)}
+.modal.sw-out .modal-media,.modal.sw-out .modal-doc>:not(.modal-nav){opacity:0;translate:var(--dx,0px) 0}
+.modal.sw-pre .modal-media,.modal.sw-pre .modal-doc>:not(.modal-nav){transition:none;opacity:0;translate:var(--dx,0px) 0}
+.modal-index button{transition:color .25s,background .35s,border-color .35s}
+.modal.is-busy .modal-nav .nav-btn{opacity:.55;pointer-events:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+</style>
+<noscript><style>#landing,#curtains{display:none!important}#app{display:block!important}body.is-landing{overflow:auto!important}</style></noscript>
+</head>
+<body class="is-landing">
+<a class="skip" href="#world" data-t="skip">본문으로 건너뛰기</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="o-rule" viewBox="0 0 240 16"><g fill="none" stroke="currentColor" stroke-width="1" opacity=".75"><path d="M0 8h92M148 8h92"/></g><path d="M104 8l16-6 16 6-16 6z" fill="currentColor"/><circle cx="84" cy="8" r="1.8" fill="currentColor"/><circle cx="156" cy="8" r="1.8" fill="currentColor"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.2v13.6L19.4 12z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-vol" viewBox="0 0 24 24"><path d="M3.5 9.5v5H7l5 4v-13l-5 4z" fill="currentColor" stroke="none"/><path d="M15.4 9.2a4 4 0 010 5.6M18 6.6a7.6 7.6 0 010 10.8"/></symbol>
+<symbol id="i-mute" viewBox="0 0 24 24"><path d="M3.5 9.5v5H7l5 4v-13l-5 4z" fill="currentColor" stroke="none"/><path d="M15.5 9.5l5 5M20.5 9.5l-5 5"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+<symbol id="i-prev" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+<symbol id="i-zoom" viewBox="0 0 24 24"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></symbol>
+<symbol id="i-top" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></symbol>
+<symbol id="i-fog" viewBox="0 0 24 24"><path d="M3 8c2.2-2 4.4 2 6.6 0s4.4 2 6.6 0 3.2 1.2 4.8.4M3 13c2.2-2 4.4 2 6.6 0s4.4 2 6.6 0 3.2 1.2 4.8.4M3 18c2.2-2 4.4 2 6.6 0s4.4 2 6.6 0 3.2 1.2 4.8.4"/></symbol>
+<symbol id="i-grave" viewBox="0 0 24 24"><path d="M7 21v-7a5 5 0 0110 0v7M4.5 21h15M12 11v5.5M9.8 13.4h4.4"/></symbol>
+<symbol id="i-feather" viewBox="0 0 24 24"><path d="M20 4C11 4 6 9 6 16l-2.5 4.5M20 4c0 9-5 14-12 14M9 15.5l7-7.5M12.5 12.5h4"/></symbol>
+<symbol id="i-lens" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.3"/><path d="M15.2 15.2l5.6 5.6M8 10.2a2.8 2.8 0 012.4-2.4"/></symbol>
+<symbol id="i-city" viewBox="0 0 24 24"><path d="M3 20.5h18M5 20.5V11l3-1.6v11.1M8 20.5V6.5L11.6 4 15 6.5v14M15 20.5v-8l4 1.4v6.6M11.6 8.5v1.4M11.6 12v1.4M11.6 15.6V17"/></symbol>
+<symbol id="i-badge" viewBox="0 0 24 24"><path d="M12 3l7.5 2.7v5.6c0 4.6-3.2 8-7.5 9.7-4.3-1.7-7.5-5.1-7.5-9.7V5.7z"/><path d="M12 8.2l1.2 2.4 2.6.4-1.9 1.8.5 2.6-2.4-1.3-2.4 1.3.5-2.6-1.9-1.8 2.6-.4z"/></symbol>
+<symbol id="i-anchor" viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="2"/><path d="M12 7.5v13M8 11h8M5 14.5c.3 3.2 3.2 6 7 6s6.7-2.8 7-6M5 14.5l-1.8 1.3M19 14.5l1.8 1.3"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.3 2M12 3.5v1M12 19.5v1M3.5 12h1M19.5 12h1"/></symbol>
+</defs></svg>
+
+<!-- 시작 화면 -->
+<section id="landing" class="landing" aria-label="시작 화면" data-ta="aria-label:a.landing">
+  <img class="landing-bg" src="브리타니아제국.webp" alt="" decoding="async" fetchpriority="high">
+  <div class="landing-shade"></div>
+  <div class="fog fog-a"></div><div class="fog fog-b"></div>
+  <div class="landing-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="landing-inner">
+    <p class="l-agency l-in" style="--d:.2s">VERITAS DETECTIVE AGENCY</p>
+    <svg class="l-rule l-in" style="--d:.4s" viewBox="0 0 240 16" aria-hidden="true"><use href="#o-rule"/></svg>
+    <h1 class="l-title l-in" style="--d:.6s"><span>BRITANNIA</span><span>ARCHIVES</span></h1>
+    <p class="l-sub l-in" style="--d:1s" data-t="l.sub">브리타니아 제국 기밀 문서고</p>
+    <div class="l-lang l-in" style="--d:1.2s" role="group" aria-label="Language">
+      <p class="l-lang-label">언어를 선택하세요 / Select Language / 言語を選択してください</p>
+      <div class="l-lang-btns">
+        <button type="button" data-lang="ko" lang="ko" aria-pressed="true">한국어</button>
+        <button type="button" data-lang="en" lang="en" aria-pressed="false">English</button>
+        <button type="button" data-lang="ja" lang="ja" aria-pressed="false">日本語</button>
+      </div>
+    </div>
+    <button id="enterBtn" class="enter l-in" style="--d:1.4s" type="button"><span class="enter-ko" data-t="l.enter">입장하기</span><span class="enter-en" data-t="l.enter2">Enter Archives</span></button>
+    <p class="l-note l-in" style="--d:1.7s" data-t="l.note">입장하면 배경음악이 재생됩니다.</p>
+  </div>
+</section>
+
+<!-- 본 화면 -->
+<div id="app" class="app" hidden tabindex="-1">
+<header id="gnb" class="gnb">
+  <div class="gnb-in">
+    <a class="brand" href="#world" aria-label="베리타스 탐정 사무소, 처음으로" data-ta="aria-label:a.brand">
+      <span class="brand-mark"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lens"/></svg></span>
+      <span class="brand-text"><b>VERITAS</b><i>Britannia Archives</i></span>
+    </a>
+    <nav class="nav" aria-label="주 메뉴" data-ta="aria-label:a.nav">
+      <a href="#world" data-nav="world"><span class="ko" data-t="nav.world">세계관</span><span class="en" data-t="nav.world.s">World</span></a>
+      <a href="#characters" data-nav="characters"><span class="ko" data-t="nav.chars">주요 인물</span><span class="en" data-t="nav.chars.s">Characters</span></a>
+      <a href="#locations" data-nav="locations"><span class="ko" data-t="nav.locs">주요 지역</span><span class="en" data-t="nav.locs.s">Locations</span></a>
+    </nav>
+    <div class="gnb-tools">
+    <div class="lang" role="group" aria-label="언어" data-ta="aria-label:a.lang">
+      <button type="button" data-lang="ko" lang="ko" title="한국어" aria-pressed="true">KR</button><button type="button" data-lang="en" lang="en" title="English" aria-pressed="false">EN</button><button type="button" data-lang="ja" lang="ja" title="日本語" aria-pressed="false">JP</button>
+    </div>
+    <div id="audioCtl" class="audio" role="group" aria-label="배경음악 컨트롤" data-ta="aria-label:a.audio">
+      <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <button id="btnPlay" class="brass" type="button" aria-label="배경음악 재생"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use id="useP" href="#i-play"/></svg></button>
+      <button id="btnMute" class="brass brass-sm" type="button" aria-label="음소거" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use id="useM" href="#i-vol"/></svg></button>
+      <label class="vol"><span class="sr-only" data-t="audio.vol">볼륨</span><input id="vol" type="range" min="0" max="100" step="1" value="50"></label>
+    </div>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section id="world" class="section" aria-labelledby="world-title">
+  <div class="wrap">
+    <header class="sec-head rv">
+      <h2 id="world-title" class="sec-title" data-t="sec.world">세계관</h2>
+      <svg class="sec-rule" viewBox="0 0 240 16" aria-hidden="true"><use href="#o-rule"/></svg>
+      <p class="sec-lead" data-t="w.lead">화려한 번영과 잔혹한 이면이 공존하는, 밤마다 안개에 잠기는 제국</p>
+    </header>
+
+    <div class="world-top">
+      <article class="folder rv">
+        <span class="folder-tab" data-t="w.tab">제국 개요</span>
+        <div class="paper sheet">
+          <span class="stamp" aria-hidden="true" data-t="w.stamp">극비</span>
+          <h3 class="doc-title"><span data-t="w.t">브리타니아 제국</span><small data-t="w.t.s">Britannia Empire</small></h3>
+          <p data-t="w.p1">브리타니아 제국(Britannia Empire)은 화려한 번영과 잔혹한 이면이 공존하는 유럽풍의 제국이다. 정치와 경제가 극도로 활발하여 권력을 쥔 상류층 귀족들이 호의호식하는 반면, 그들의 그림자 아래에는 하루를 겨우 버티는 빈곤층들이 빽빽이 늘어서 있다.</p>
+          <p data-t="w.p2">이 제국의 가장 큰 특징은 365일 내내 밤마다 도시 전체를 집어삼킬 듯 짙게 깔리는 안개다. 아침이 되면 안개는 그나마 걷히며 숨통이 트이지만, 해가 지면 다시 사방을 분간할 수 없는 암흑과 안개의 세계가 찾아온다.</p>
+          <blockquote class="pull" data-t="w.pull">해가 지면 다시 사방을 분간할 수 없는 암흑과 안개의 세계가 찾아온다.</blockquote>
+          <p data-t="w.p3">이 기괴한 밤의 장막 속에서 제국은 끊임없는 범죄에 신음한다. 잔혹한 연쇄살인과 기괴한 실종, 귀족들의 추악한 정치적 음모까지 온갖 사건 사고가 매일같이 터져 나온다.</p>
+          <p data-t="w.p4">관료주의에 물든 일반 경찰의 공권력으로는 이 거대한 혼돈을 해결하지 못하기에, 안개 속에 가려진 진실을 파헤치고 사각지대의 미스터리를 풀어낼 냉철한 탐정들이 제국의 필수적인 존재로 자리 잡았다.</p>
+        </div>
+      </article>
+
+      <aside class="side">
+        <div class="slip rv">
+          <h3 data-t="w.slip">제국 현황</h3>
+          <dl class="facts">
+            <div><dt data-t="f.fog">안개</dt><dd data-t="f.fog.d">365일, 해가 지면 도시 전체를 덮는다</dd></div>
+            <div><dt data-t="f.cap">수도</dt><dd data-t="loc:arden">아르덴 런던</dd></div>
+            <div><dt data-t="f.up">상류층</dt><dd data-t="f.up.d">귀족의 대저택과 사교 클럽</dd></div>
+            <div><dt data-t="f.poor">빈곤층</dt><dd data-t="loc:whitechapel">화이트 채플 구역</dd></div>
+            <div><dt data-t="f.law">치안</dt><dd data-t="f.law.d">왕립 경찰청(RPD)</dd></div>
+            <div><dt data-t="f.req">의뢰</dt><dd data-t="f.req.d">베이커 거리의 탐정 사무소</dd></div>
+          </dl>
+        </div>
+
+        <div id="dayNight" class="dn rv" data-mode="night">
+          <div class="dn-head">
+            <h3 data-t="dn.h">아르덴 런던의 하루</h3>
+            <div class="seg" role="group" aria-label="시간대 선택" data-ta="aria-label:a.seg">
+              <button type="button" data-mode="day" aria-pressed="false" data-t="dn.btn.day">아침</button>
+              <button type="button" data-mode="night" aria-pressed="true" data-t="dn.btn.night">밤</button>
+            </div>
+          </div>
+          <div class="dn-view" aria-hidden="true">
+            <div class="dn-sky dn-day"></div><div class="dn-sky dn-night"></div>
+            <svg class="dn-city" viewBox="0 0 300 120" preserveAspectRatio="xMidYMax slice" fill="currentColor">
+              <path d="M0 120V80l23-18 23 18v40zM52 120V58l9-26 9 26v62zM76 120V74h16l8-9 8 9h8v46zM126 120V46l19-44 19 44v74zM172 120V70l19-14 19 14v50zM216 120V54l10-28 10 28v66zM242 120V78l29-17 29 17v42z"/>
+              <circle class="dn-face" cx="145" cy="62" r="8"/>
+              <path d="M145 62v-5M145 62l3.6 2.2" fill="none" stroke="#2a1b07" stroke-width="1.2" stroke-linecap="round"/>
+              <g class="dn-win"><rect x="10" y="92" width="3" height="5"/><rect x="30" y="92" width="3" height="5"/><rect x="58" y="76" width="3" height="5"/><rect x="58" y="94" width="3" height="5"/><rect x="82" y="88" width="3" height="5"/><rect x="104" y="88" width="3" height="5"/><rect x="134" y="84" width="3" height="5"/><rect x="152" y="96" width="3" height="5"/><rect x="180" y="84" width="3" height="5"/><rect x="198" y="96" width="3" height="5"/><rect x="223" y="74" width="3" height="5"/><rect x="250" y="92" width="3" height="5"/><rect x="284" y="96" width="3" height="5"/></g>
+            </svg>
+            <i class="dn-lamp" style="left:10%"></i><i class="dn-lamp" style="left:90%"></i>
+            <div class="dn-mist"></div>
+          </div>
+          <p id="dnText" class="dn-text"></p>
+          <button class="link" type="button" data-loc="arden" data-t="dn.link">아르덴 런던 상세 보기</button>
+        </div>
+      </aside>
+    </div>
+
+    <h3 class="sub-head rv" data-t="w.powers">제국을 움직이는 힘</h3>
+    <div class="powers">
+      <article class="pw pw-club rv">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-feather"/></svg>
+        <h4 data-t="loc:club">블랙 레이븐 클럽</h4>
+        <p data-t="pw.club.p">겉으로는 고상한 귀족들의 친목 모임이 열리는 상류층 전용 사교클럽. 그러나 눈부신 조명 뒤편에서는 고위 정치와 은밀한 범죄가 얽힌 강력한 비밀 조직의 회합이 진행되고, 국가의 운명을 흔드는 음모가 이 클럽 안에서 결정된다.</p>
+        <button class="link" type="button" data-loc="club" data-t="pw.club.l">블랙 레이븐 클럽 상세 보기</button>
+      </article>
+      <article class="pw pw-rpd paper rv">
+        <h4><span data-t="loc:rpd">왕립 경찰청</span><small data-t="pw.rpd.s">Royal Police Department</small></h4>
+        <p data-t="pw.rpd.p1">줄여서 RPD라고 불리는 제국의 치안 담당 국가기관. 형사와 감식반, 증거보관실, 유치장을 체계적으로 갖추었지만 복잡하고 기괴한 사건을 모두 해결하기에는 한계가 있어 종종 민간 탐정과 협력해 수사를 진행한다.</p>
+        <p data-t="pw.rpd.p2">간혹 상층 귀족들이 돈으로 매수하여 범죄나 사건을 넘겨받는 일도 일어난다고 한다.</p>
+        <button class="link" type="button" data-loc="rpd" data-t="pw.rpd.l">왕립 경찰청 상세 보기</button>
+      </article>
+      <article class="pw pw-agency paper rv">
+        <h4 data-t="pw.ag.h">탐정 사무소</h4>
+        <p data-t="pw.ag.p">제국에서 일어나는 사건을 의뢰받아 해결하는 사설 조사 기관. 제국 경찰의 손이 닿지 않는 일을 맡는 해결사 역할을 한다.</p>
+        <ul class="checks">
+          <li data-t="pw.ag.li1">은밀한 살인·실종 사건</li>
+          <li data-t="pw.ag.li2">귀족들의 추악한 스캔들</li>
+          <li data-t="pw.ag.li3">크로우 항구의 밀수 사건</li>
+        </ul>
+        <button class="link" type="button" data-loc="baker" data-t="pw.ag.l">탐정 사무소가 모인 베이커 거리 보기</button>
+      </article>
+      <article class="pw pw-white rv">
+        <h4 data-t="loc:whitechapel">화이트 채플 구역</h4>
+        <p data-t="pw.wh.p">수도 경계 밖, 제국에서 가장 소외된 빈곤층의 마을. 가스등 불빛조차 닿지 않는 골목마다 범죄와 위험이 도사려 일반 경찰조차 발을 들이기 꺼린다.</p>
+        <button class="link" type="button" data-loc="whitechapel" data-t="pw.wh.l">화이트 채플 구역 상세 보기</button>
+      </article>
+    </div>
+  </div>
+</section>
+<section id="characters" class="section chars" aria-labelledby="chars-title">
+  <div class="wrap">
+    <header class="sec-head rv">
+      <h2 id="chars-title" class="sec-title" data-t="sec.chars">주요 인물</h2>
+      <svg class="sec-rule" viewBox="0 0 240 16" aria-hidden="true"><use href="#o-rule"/></svg>
+      <p class="sec-lead" data-t="c.lead">탐정과 경찰, 정보꾼, 그리고 제국을 노리는 귀족 남매. 초상을 고르면 인물 조서가 펼쳐집니다.</p>
+    </header>
+    <div id="roster" class="roster rv" role="tablist" aria-label="주요 인물 선택" data-ta="aria-label:a.roster"></div>
+    <div id="stage" class="stage"></div>
+    <div class="stage-nav">
+      <button id="prevChar" class="nav-btn" type="button"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-prev"/></svg><span data-t="c.prev">이전 인물</span></button>
+      <span id="charCount" class="count" aria-live="polite"></span>
+      <button id="nextChar" class="nav-btn" type="button"><span data-t="c.next">다음 인물</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-next"/></svg></button>
+    </div>
+  </div>
+</section>
+<section id="locations" class="section locs" aria-labelledby="locs-title">
+  <div class="wrap">
+    <header class="sec-head rv">
+      <h2 id="locs-title" class="sec-title" data-t="sec.locs">주요 지역</h2>
+      <svg class="sec-rule" viewBox="0 0 240 16" aria-hidden="true"><use href="#o-rule"/></svg>
+      <p class="sec-lead" data-t="l.lead">고지도의 표식이나 아래 그림 액자를 누르면 지역의 기록이 펼쳐집니다.</p>
+    </header>
+
+    <div class="frame map-frame rv">
+      <div id="map" class="map paper">
+        <svg class="map-svg" viewBox="0 0 1000 640" role="img" aria-label="아르덴 런던과 주변 지역을 그린 고지도" data-ta="aria-label:a.map">
+          <defs>
+            <pattern id="mBlk" width="16" height="16" patternUnits="userSpaceOnUse"><rect x="2" y="2" width="5" height="5" fill="#6b5230" opacity=".42"/><rect x="9" y="3" width="5" height="9" fill="#6b5230" opacity=".32"/><rect x="2" y="9" width="5" height="5" fill="#6b5230" opacity=".28"/></pattern>
+            <pattern id="mSea" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-18)"><path d="M0 5h10" stroke="#4a6470" stroke-width=".8" opacity=".45"/></pattern>
+            <g id="mShip"><path d="M0-15v13l9-3zM-9-2H0" fill="#3a2812" opacity=".7"/><path d="M-8 1h18l-4 5H-4z" fill="#3a2812" opacity=".7"/></g>
+          </defs>
+          <path d="M0 160H1000M0 320H1000M0 480H1000M250 0V640M500 0V640M750 0V640" fill="none" stroke="#5b4326" stroke-opacity=".13"/>
+          <path d="M1000 318C940 340 904 404 884 462C862 524 800 566 700 596C652 610 626 626 606 640H1000Z" fill="#6f8a94" fill-opacity=".26"/>
+          <path d="M1000 318C940 340 904 404 884 462C862 524 800 566 700 596C652 610 626 626 606 640H1000Z" fill="url(#mSea)"/>
+          <path d="M1000 318C940 340 904 404 884 462C862 524 800 566 700 596C652 610 626 626 606 640" fill="none" stroke="#3a2812" stroke-width="2.2" stroke-opacity=".75"/>
+          <path d="M440 82C560 78 690 120 722 220C748 300 716 400 640 462C560 524 420 528 320 480C210 428 150 330 168 235C188 140 310 88 440 82Z" fill="url(#mBlk)" stroke="#4a3520" stroke-width="2.6" stroke-dasharray="11 5 2 5"/>
+          <path d="M440 300V86M440 300 716 236M440 300 172 246M440 300 330 486M440 300 640 460M440 300 300 140M440 300 560 128" fill="none" stroke="#5b4326" stroke-opacity=".5" stroke-width="3"/>
+          <circle cx="440" cy="300" r="96" fill="none" stroke="#5b4326" stroke-opacity=".4" stroke-dasharray="3 6"/>
+          <path d="M-10 400C100 410 190 450 300 452C420 454 470 410 560 438C650 466 760 480 886 494" fill="none" stroke="#587078" stroke-width="18" stroke-opacity=".5" stroke-linecap="round"/>
+          <path d="M-10 400C100 410 190 450 300 452C420 454 470 410 560 438C650 466 760 480 886 494" fill="none" stroke="#a9bcba" stroke-width="8" stroke-opacity=".45" stroke-linecap="round"/>
+          <path d="M352 436l16 32M492 418l16 30" stroke="#3a2812" stroke-width="3" opacity=".6"/>
+          <path d="M772 300L832 278L906 298L922 362L862 396L786 380Z" fill="url(#mBlk)" stroke="#4a3520" stroke-width="1.6" stroke-dasharray="4 4"/>
+          <ellipse cx="660" cy="180" rx="54" ry="40" fill="none" stroke="#4a3520" stroke-dasharray="3 4" opacity=".6"/>
+          <path d="M632 150v12M627 155h10M648 190v12M643 195h10M690 160v12M685 165h10M672 205v12M667 210h10M628 192v12M623 197h10" stroke="#4a3520" stroke-width="1.4" opacity=".6"/>
+          <path d="M812 500L860 490L872 530L826 546Z" fill="url(#mBlk)" stroke="#4a3520" stroke-width="1.4"/>
+          <path d="M870 486l30 10M866 504l34 6M868 522l30 4" stroke="#3a2812" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+          <use href="#mShip" x="940" y="536"/><use href="#mShip" x="908" y="584"/><use href="#mShip" x="962" y="452"/>
+          <g transform="translate(902 112)"><circle r="40" fill="none" stroke="#3a2812" stroke-width="1.2" opacity=".6"/><path d="M0-40 7-7 40 0 7 7 0 40-7 7-40 0-7-7Z" fill="#3a2812" opacity=".75"/><path d="M0-40 7-7 0 0Z" fill="#6b121a"/><text y="-48" text-anchor="middle" class="m-n">N</text></g>
+          <g transform="translate(46 540)"><rect width="292" height="66" fill="#e8d9b3" fill-opacity=".55" stroke="#3a2812" stroke-width="2"/><rect x="5" y="5" width="282" height="56" fill="none" stroke="#3a2812" stroke-width=".8"/><text x="146" y="30" text-anchor="middle" class="m-title">MAP OF ARDEN LONDON</text><text x="146" y="50" text-anchor="middle" class="m-sub">and the Fogbound Environs of Britannia</text></g>
+          <rect x="10" y="10" width="980" height="620" fill="none" stroke="#3a2812" stroke-width="3"/>
+          <rect x="20" y="20" width="960" height="600" fill="none" stroke="#3a2812" stroke-width="1"/>
+        </svg>
+        <div id="pins" class="pins"></div>
+      </div>
+    </div>
+
+    <div id="locGrid" class="loc-grid"></div>
+  </div>
+</section>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <svg class="foot-rule" viewBox="0 0 240 16" aria-hidden="true"><use href="#o-rule"/></svg>
+    <p class="foot-title">Veritas Detective Agency</p>
+    <p class="foot-note" data-t="foot.note">이 사이트는 가상의 세계관 ‘브리타니아 제국’을 소개하는 설정 자료입니다.</p>
+    <a class="foot-top" href="#world"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-top"/></svg><span data-t="foot.top">맨 위로</span></a>
+  </div>
+</footer>
+</div>
+
+<!-- 지역 상세 모달 -->
+<div id="locModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="locTitle" hidden>
+  <div class="modal-back" data-close></div>
+  <div class="modal-card">
+    <button class="modal-x" type="button" data-close aria-label="닫기" data-ta="aria-label:a.close"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-close"/></svg></button>
+    <div class="modal-scroll">
+      <div class="modal-left">
+        <figure class="modal-media"><div class="frame"><div id="locPh" class="ph" style="--ar:4/3"><img id="locImg" alt=""></div></div></figure>
+        <nav class="modal-index" aria-label="지역 목록" data-ta="aria-label:a.locidx"><ol id="locIndex"></ol></nav>
+      </div>
+      <div class="modal-doc paper">
+        <h3 id="locTitle" class="modal-title"></h3>
+        <p id="locEn" class="modal-en"></p>
+        <ul id="locTags" class="tags"></ul>
+        <div id="locText" class="modal-text"></div>
+        <div id="locRel" class="modal-rel" hidden></div>
+        <div class="modal-nav">
+          <button id="locPrev" class="nav-btn" type="button"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-prev"/></svg><span data-t="m.prev">이전 지역</span></button>
+          <span id="locCount" class="count"></span>
+          <button id="locNext" class="nav-btn" type="button"><span data-t="m.next">다음 지역</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-next"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 인물 이미지 확대 -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="이미지 크게 보기" data-ta="aria-label:a.lb" hidden>
+  <button class="modal-x" type="button" data-close aria-label="닫기" data-ta="aria-label:a.close"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-close"/></svg></button>
+  <figure class="lb-fig"><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+</div>
+
+<!-- 벨벳 커튼 전환 -->
+<div id="curtains" class="curtains" aria-hidden="true" hidden>
+  <div class="cur cur-l"><span class="cur-fold"></span></div>
+  <div class="cur cur-r"><span class="cur-fold"></span></div>
+  <div class="cur-rod"><i></i><i></i></div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<audio id="bgm" src="BGM.mp3" loop preload="auto"></audio>
+
+<script>
+(function(){
+'use strict';
+/* ---------- DATA : 인물 (7명) ---------- */
+const CHARS=[
+{id:'eleanor',img:'엘레노어.webp',name:'엘레노어 해링턴',en:'Eleanor Harrington',tag:'탐정',
+ line:'물질적 증거와 인과관계로 안개 속 사건을 재구성하는 탐정',mbti:'INTJ',
+ basic:[['성별','여성'],['나이','28세'],['신장','164cm'],['체중','49kg'],['직위','베리타스 탐정 사무소 탐정']],
+ look:['어깨 정도로 내려오는 회색 머리에 뒷머리를 정교하게 올린 반묶음 헤어스타일','날카로우면서도 매혹적인 금빛 눈동자','인형처럼 또렷하고 화려한 세련된 미인형 외모','귀에 착용한 작고 고풍스러운 금색 귀걸이','볼륨감 넘치고 입체적인 몸매 라인'],
+ outfit:['브라운 플래드 패턴의 베레모','클래식한 카멜색 오버사이즈 트렌치코트','깔끔한 화이트 셔츠와 블랙 넥타이','금빛 버클이 달린 검은색 가죽 벨트 및 하이웨이스트 스커트','검은색 가죽 장갑'],
+ trait:['감정을 철저히 배제하고 물질적 증거와 인과관계만을 바탕으로 사건을 재구성함','예리한 직관과 완벽주의로 1%의 오류도 허용하지 않으며, 제국 전체의 음모를 몇 수 앞서 내다봄','평소엔 공감 능력이 없고 직언(팩트폭력)을 내뱉지만, 신뢰하는 조수에게는 은근히 장난을 치거나 대화하는 것을 즐김'],
+ feat:['베이커 거리에 위치한 ‘베리타스 탐정 사무소’를 운영하며, 제국 내에서 손에 꼽히는 최고 수준의 실력파 탐정임','금전적인 대가보다는 사건의 난이도와 흥미를 우선시하며, 가벼운 사건은 조수에게 맡김','파이프 담배를 즐겨 피기 때문에 항상 챙겨다님','한번 맡은 의뢰는 어떤 위험이 있어도 절대 포기하지 않는 철칙을 지님','위선적이고 자기중심적인 귀족들을 매우 혐오하며, 그들의 의뢰는 거들떠보지도 않음','피해자들의 감정을 서툴게나마 이해하고 추리의 동력으로 삼음'],
+ people:['alexander'],places:['baker']},
+{id:'alexander',img:'알렉산더.webp',name:'알렉산더 헤이슨',en:'Alexander Hayson',tag:'수사경감',
+ line:'투덜거리면서도 결국 부탁을 들어주는 왕립 경찰청 수사경감',mbti:'ESTJ',
+ basic:[['성별','남성'],['나이','42세'],['신장','186cm'],['체중','80kg'],['직위','왕립 경찰청 형사국 수사경감']],
+ look:['짙은 갈색의 반묶음 장발','호박색이 감도는 황갈색 눈동자','짙고 선명한 눈썹과 날카롭게 올라간 눈매','턱과 입가에 옅게 자란 짧은 수염','큰 키와 탄탄하고 다부진 체격','냉철하고 무심하면서도 여유로운 인상'],
+ outfit:['흰색 셔츠','검정색 넥타이','짙은 남색의 경찰 제복 재킷','검은색 선글라스','금색 단추와 경찰 배지'],
+ trait:['현실적이고 책임감이 강하며, 이성과 효율을 우선시함','다혈질 성격 존재','정의감만으로 세상을 바꿀 수 없다고 생각함','부탁받으면 귀찮다는 듯 투덜거리면서도 결국 대부분 들어줌'],
+ feat:['엘레노어와 인연이 있는 협력관계','담배를 자주 핌','귀족들이 속해있는 블랙 레이븐 클럽을 제외한 브리타니아 제국의 구역 내 일반 범죄 수사 총괄','탐정의 요청을 검토하여 법원에 수색영장 및 체포영장 발급 신청 가능'],
+ people:['eleanor'],places:['rpd']},
+{id:'clara',img:'클라라.webp',name:'클라라 발렌타인',en:'Clara Valentine',tag:'정보꾼',
+ line:'돈을 주면 밤거리에서 모은 정보를 파는 블랙마켓의 정보꾼',mbti:'ENFJ',
+ basic:[['성별','여성'],['나이','23세'],['신장','154cm'],['체중','44kg'],['직위','블랙마켓의 정보꾼']],
+ look:['허리 아래까지 내려오는 은백색 장발','낮게 묶은 트윈테일 스타일','푸른색 눈동자','희고 깨끗한 피부','가늘고 여리여리한 체형','신비로우면서도 장난기 어린 분위기','작고 뾰족한 송곳니'],
+ outfit:['검은색 페도라 모자','청색의 머플러','블랙 코트','은색 모노클','검은색 가죽 장갑','검은색 가죽 백팩','흰색 스커트'],
+ trait:['장난기가 많고, 짓궂은 농담으로 상대를 놀리는 것을 즐김','돈을 무척 좋아하며, 이익이 되는 일에는 눈을 반짝임','손익과 위험을 꼼꼼히 계산하며, 언제나 자신에게 유리한 방향을 모색함','부탁이나 협력을 거래처럼 여기고 조건과 보상을 확실히 따지는 편'],
+ feat:['밤마다 거리를 돌아다니며 수많은 정보를 듣고 수집함','탐정들 사이에서 유명함','돈을 주면 질문에 관한 정보를 줌','화이트 채플 구역이나 블랙 마켓에 자주 출현'],
+ people:[],places:['whitechapel']},
+{id:'lucas',img:'루카스.webp',name:'루카스 윈터',en:'Lucas Winter',tag:'감식관',
+ line:'끔찍한 현장에서도 침착하게 증거를 분석하는 감식관',mbti:'INTP',
+ basic:[['성별','남성'],['나이','31세'],['신장','179cm'],['체중','67kg'],['직위','왕립 경찰청 감식관']],
+ look:['짙은 흑발의 자연스러운 숏컷','청색 눈동자','앞머리가 눈가를 살짝 덮는 헝클어진 헤어스타일','가늘고 날카롭게 뻗은 눈매','희고 깨끗한 피부','차분하고 지적인 분위기','무심하면서도 냉철한 인상'],
+ outfit:['하늘색 셔츠','검은색 넥타이','흰색 연구 가운','은색 안경','흰색 마스크','검은색 슬랙스'],
+ trait:['논리적이고 분석적인 사고방식을 지녔으며, 객관적인 사실과 근거를 중시함','사소한 흔적이나 미세한 차이도 놓치지 않으며, 세밀한 관찰을 통해 사건의 실마리를 찾아냄','끔찍한 범죄 현장에서도 감정적으로 동요하지 않고 침착하게 증거를 분석함','사교적인 대화나 감정적인 위로에는 서툴고 무뚝뚝하지만, 업무만큼은 꼼꼼하고 철저하게 처리함'],
+ feat:['사건현장에서 증거물을 직접 수집하고 분석함','증거가 나오면 바로 사건 담당 탐정이나 경찰에게 전달함'],
+ people:[],places:['rpd']},
+{id:'rosy',img:'로지.webp',name:'로지 밀러',en:'Rosy Miller',tag:'빵집 주인',
+ line:'탐정도 경찰도 민간인도 찾아오는 베이커 거리의 인기 빵집 주인',mbti:'ENFP',
+ basic:[['성별','여성'],['나이','34세'],['신장','167cm'],['체중','59kg'],['직위','베이커 거리의 빵집 주인']],
+ look:['금발 머리에 뒷머리를 정교하게 올려 묶고 땋은 헤어스타일','날카로우면서도 매혹적인 주황색 눈동자','입술 아래 점 하나','나이보다 훨씬 젊어 보이는 동안의 외모','인형처럼 또렷하고 화려한 세련된 미인형 외모','볼륨감 넘치고 입체적인 몸매 라인'],
+ outfit:['갈색 베레모 모자','흰색 블라우스','에메랄드빛 보석이 박힌 검은색 리본 넥타이','흰색 오페라 장갑','갈색 롱스커트'],
+ trait:['특유의 따뜻함과 활기로 주변 분위기를 밝게 만듦','항상 밝은 웃음을 잃지 않고, 타인의 말과 행동에 호응해주며 뛰어난 공감 능력을 보여줌','누구에게나 존댓말을 사용하며 항상 친절함'],
+ feat:['탐정, 경찰, 민간인 가릴 것 없이 누구나 찾아오는 유명한 빵집을 운영 중','모든 사람들에게 인기가 많음','많은 사람들이 오가는 만큼 수많은 이야기들을 전해들음'],
+ people:[],places:['baker']},
+{id:'celestia',img:'셀레스티아.webp',name:'셀레스티아 펜드래곤',en:'Celestia Pendragon',tag:'클럽 창설자',
+ line:'다정한 얼굴 뒤에서 제국 장악을 꿈꾸는 블랙 레이븐 클럽 창설자',mbti:'ESTJ',
+ basic:[['성별','여성'],['나이','25세'],['신장','161cm'],['체중','45kg'],['직위','블랙 레이븐 클럽 창설자']],
+ look:['긴 장발의 섬세한 은발 웨이브 헤어','알비노 특유의 흰 피부','흰색 눈썹과 속눈썹','몽환적인 자주빛 눈동자','우아하고 고귀한 인상'],
+ outfit:['화려한 순백 오프숄더 드레스','하얀색 긴 레이스 드레스 장갑','고풍스러운 부채','흰색 오페라 장갑','은빛 티아라 왕관'],
+ trait:['겉으로는 온갖 다정하고 선한 태도로 주변의 신망을 얻지만, 실상은 타인을 철저히 수단으로만 여김','모든 상황을 철저한 계산과 치밀한 계획 아래 움직임','감정에 흔들리지 않는 합리적 판단력으로 판세를 읽음'],
+ feat:['귀족 가문 중에서도 최상위 명문 가문의 인물임','단순한 귀족 간의 권력 다툼을 넘어 제국 전체를 장악하려는 거대한 야망을 품고 있음','세드릭 펜드래곤이라는 이름의 친오빠가 존재함','절대 직접 손을 대지 않고 철저한 배후에서 계획을 조율하며 자신의 정체를 숨김'],
+ people:['cedric'],places:['club']},
+{id:'cedric',img:'세드릭.webp',name:'세드릭 펜드래곤',en:'Cedric Pendragon',tag:'가문 후계자',
+ line:'여동생의 계획을 무력으로 뒷받침하는 펜싱 실력자',mbti:'ISTJ',
+ basic:[['성별','남성'],['나이','27세'],['신장','184cm'],['체중','75kg'],['직위','펜드래곤 가문 후계자']],
+ look:['은발 가일컷 헤어','알비노 특유의 흰 피부','흰색 눈썹과 속눈썹','몽환적인 자주빛 눈동자','냉소적이면서도 오만한 분위기를 풍기는 단단한 인상'],
+ outfit:['푸른색 귀족 제복','금빛 자수와 화려한 은색 견장','하얀 털 장식이 달린 망토','검은색 가죽 장갑'],
+ trait:['신분이 낮은 인간들을 한낱 벌레만도 못하게 여기는 오만한 태도','감정에 휘둘리지 않는 냉혹한 현실주의자','목표를 위해서라면 수단과 방법을 가리지 않는 잔혹한 성격','자신의 여동생을 극도로 아끼며 그녀의 목표를 위해선 어떤 일이든 따르려 함'],
+ feat:['귀족 가문 중에서도 최상위 명문 가문의 인물임','셀레스티아 펜드래곤이라는 이름의 여동생이 존재함','여동생의 계획이 완벽하게 이뤄지도록 뒤에서 무력과 가문의 권력을 동원해 지원함','뛰어난 펜싱 실력자이자, 무력도 일반인보다 강함'],
+ people:['celestia'],places:[]}
+];
+/* ---------- DATA : 지역 (8곳) ---------- */
+const LOCS=[
+{id:'whitechapel',img:'화이트채플구역.webp',name:'화이트 채플 구역',en:'Whitechapel District',icon:'i-fog',region:'수도 아르덴 런던 경계 밖',x:84,y:52,
+ sum:'제국에서 가장 소외된 빈곤층의 마을. 안개가 가장 짙고 연쇄살인과 실종이 끊이지 않는다.',
+ tags:['빈곤층의 마을','가장 짙은 안개','치안의 사각지대'],
+ desc:['수도 아르덴 런던의 경계 밖에 위치한, 제국에서 가장 소외된 빈곤층들의 마을이다. 낡고 허름한 벽돌 건물들이 무질서하게 얽혀 있으며, 제국 전역을 통틀어 안개가 가장 짙고 음산하게 끼는 음울한 지역이다.','치안의 사각지대에 놓여 있어 연쇄살인과 실종 사건이 끊이지 않는 악명 높은 무법지역이기도 하다. 가스등 불빛조차 제대로 닿지 않는 어두운 골목마다 범죄와 위험이 도사리고 있어, 일반적인 경찰들조차 발을 들이기를 꺼리는 거칠고 황량한 동네다.'],
+ people:['clara']},
+{id:'greywood',img:'그레이우드묘지.webp',name:'그레이우드 묘지',en:'Greywood Cemetery',icon:'i-grave',region:'수도 아르덴 런던의 끝자락',x:66,y:27,
+ sum:'귀족들의 마지막 안식처. 담쟁이덩굴 아래에 잊힌 비밀 통로가 숨어 있다.',
+ tags:['귀족들의 안식처','잊힌 비밀 통로','밤에는 출입 통제'],
+ desc:['수도 아르덴 런던의 끝쪽에 위치한 그레이우드 묘지(Greywood Cemetery)는 도시의 가장 고풍스럽고 은밀한 구석에 자리 잡은 거대한 묘지로, 과거 귀족들의 마지막 안식처이다. 세월의 흐름에 마모된 정교한 석조 묘비와 거대한 천사상들이 즐비하여, 으스스하면서도 장엄한 분위기를 자아낸다. 밤이 되면 옅은 가스등 불빛과 창백한 달빛만이 이 영원한 침묵을 비춘다.','이곳은 단순히 죽은 자들의 땅이 아니다. 무성한 담쟁이덩굴과 이끼 아래로는 잊힌 비밀 통로가 존재하며, 이 통로는 때로는 금지된 거래나 밀회의 통로가 된다. 이 비밀 때문에 밤에는 일반인의 출입이 통제되지만, 오히려 그 고요함과 은밀함이 위험한 자들을 유혹한다. 역사적인 가치와 신비로운 분위기를 동시에 지닌 곳이다.'],
+ people:[]},
+{id:'club',img:'블랙레이븐클럽.webp',name:'블랙 레이븐 클럽',en:'Black Raven Club',icon:'i-feather',region:'수도 아르덴 런던',x:24,y:55,
+ sum:'고상한 귀족 사교클럽의 얼굴 뒤에서 비밀 조직의 회합이 열린다.',
+ tags:['상류층 전용','비밀 조직의 회합','정보 거래와 음모'],
+ desc:['제국의 수도 아르덴 런던에 위치한 상류층 전용 사교클럽이다. 화려하고 정교한 고딕 양식의 외관과 황금빛 조명은 수도 귀족들의 호화로운 권력과 부를 상징한다. 마차가 끊임없이 드나드는 이곳은 겉으로는 고상한 귀족들의 친목 모임이 이루어지는 장소이다.','하지만 눈부신 조명 뒤편에서는 고위 정치와 은밀한 범죄가 복잡하게 얽힌 강력한 비밀 조직의 회합이 진행된다. 은밀한 정보 거래부터 국가의 운명을 흔드는 음모까지, 제국의 가장 어두운 비밀들이 이 화려한 클럽 안에서 결정된다. 화려한 사교계의 정점이자 권력층의 추악한 이면이 공존하는 은밀한 장소이다.'],
+ people:['celestia']},
+{id:'baker',img:'베이커거리.webp',name:'베이커 거리',en:'Baker Street',icon:'i-lens',region:'수도 아르덴 런던 중심부',x:31,y:33,
+ sum:'탐정 사무소가 밀집한 거리. 매일 사건의 의뢰와 해결이 이루어지는 시작점이자 종착점이다.',
+ tags:['탐정 사무소들의 메카','붉은 벽돌과 가스등','사건의 시작점이자 종착점'],
+ desc:['제국의 수도 아르덴 런던의 중심부에 위치한 상징적인 거리이다. 붉은 벽돌과 정교한 고딕 양식의 건물들이 즐비하여, 빅토리아 시대의 고풍스럽고 활기찬 분위기를 그대로 간직하고 있다. 거리 곳곳에 가스등이 켜지면 몽환적이면서도 신비로운 풍경이 펼쳐진다.','이 거리는 ‘탐정 사무소들의 메카’로 불릴 만큼, 수많은 탐정 사무소가 밀집해 있다. 덕분에 제국 전역에서 의뢰인들이 가장 많이 찾는 곳이며, 매일 크고 작은 사건들의 의뢰와 해결이 이루어지는 사건의 시작점이자 종착점이다. 탐정들의 지혜와 추리가 살아 숨 쉬는, 제국 치안의 은밀한 보루이다.'],
+ people:['eleanor','rosy']},
+{id:'arden',img:'아르덴런던.webp',name:'아르덴 런던',en:'Arden London',icon:'i-city',region:'브리타니아 제국의 수도',x:45,y:20,
+ sum:'제국의 수도이자 정치·경제·문화의 중심. 번영과 음모가 함께 자라는 안개의 도시.',
+ tags:['제국의 수도','정치·경제·문화의 중심','가스등과 밤안개'],
+ desc:['브리타니아 제국의 수도이자 정치, 경제, 문화의 중심지다. 웅장한 고딕 양식의 석조 건축물들이 끝없이 늘어서 있으며, 밤이 되면 어김없이 밀려드는 짙은 안개와 그 속을 은은하게 밝히는 노란 가스등 빛이 어우러져 특유의 고풍스럽고도 미스터리한 분위기를 자아낸다. 제국의 심장부답게 막대한 부를 쥐고 흔드는 상류층 귀족들의 화려한 대저택과 사교 클럽이 밀집해 있으며, 낮과 밤이 자아내는 특유의 압도적인 경관으로 제국의 번영을 가장 잘 보여주는 상징적인 도시다.','아침의 아르덴 런던은 안개가 걷히며 활기찬 대도시의 얼굴을 띠지만, 해가 지고 밤의 장막이 내리면 사방을 분간할 수 없는 안개 속에서 온갖 기괴한 실종과 잔혹한 살인 사건, 추악한 정치적 음모가 소리 없이 피어오른다.'],
+ people:[]},
+{id:'rpd',img:'왕립경찰청.webp',name:'왕립 경찰청',en:'Royal Police Department',icon:'i-badge',region:'수도 아르덴 런던',x:56,y:60,
+ sum:'제국의 공권력을 상징하는 치안 기관(RPD). 복잡한 사건은 민간 탐정과 함께 수사한다.',
+ tags:['제국의 치안 기관','형사·감식반·유치장','민간 탐정과의 협력'],
+ desc:['왕립 경찰청(Royal Police Department). 줄여서 RPD라고 불리는 이곳은 수도 아르덴 런던 내에 자리 잡고 있는 제국의 치안 담당 국가기관이다. 웅장하고 권위 있는 석조 건축물 외관을 자랑하며, 내부에는 사건을 수사하는 형사들과 현장을 분석하는 감식반, 증거보관실, 그리고 범죄자들을 수용하는 유치장 등이 체계적으로 갖추어져 있다. 제국의 거대한 공권력을 상징하는 장소이지만, 간혹 상층 귀족들이 돈으로 매수하여 범죄나 사건 등을 넘겨주는 일도 간혹 일어난다고 한다.','하지만 이는 소수의 경우이며, 보통은 경찰청이 사건들을 해결하지만, 복잡하고 기괴한 사건들을 모두 해결하기에는 한계가 있어 종종 민간 탐정들과 협력하여 수사를 진행하기도 한다.'],
+ people:['alexander','lucas']},
+{id:'crow',img:'크로우항구.webp',name:'크로우 항구',en:'Crow Harbour',icon:'i-anchor',region:'브리타니아 제국의 가장자리',x:86,y:80,
+ sum:'제국 변방의 거대한 항구도시. 낮에는 산업의 활기, 밤에는 밀수와 암시장.',
+ tags:['제국의 가장자리','밀수와 암시장','낮과 밤이 다른 얼굴'],
+ desc:['브리타니아 제국의 가장자리에 자리 잡은 거대한 항구도시. 제국의 중심인 아르덴 런던과는 거리가 멀지만, 끊임없이 몰려드는 사람과 물자 덕분에 고유의 치안 체계를 갖추고 있다. 이곳 역시 치안 유지를 위한 유치장과 순찰하는 경찰들의 발걸음이 끊이지 않는다.','수많은 산업이 활발하게 교차하는 활기찬 곳인 동시에, 밀수와 암시장이 성행하는 어둠을 품고 있어 낮과 밤의 얼굴이 전혀 다른 곳이다. 덕분에 사건의 실마리를 쫓는 탐정들과 형사들이 증거와 증언을 수집하기 위해 가장 먼저 발을 들이는 무대이기도 하다.'],
+ people:[]},
+{id:'tower',img:'왕립시계탑.webp',name:'왕립 시계탑',en:'Royal Clock Tower',icon:'i-clock',region:'수도 아르덴 런던의 중심',x:45,y:46,
+ sum:'도시의 하늘을 찌르는 고딕 양식의 시계탑. 제국을 상징하는 가장 유명한 랜드마크.',
+ tags:['제국의 랜드마크','황금빛 네 개의 시계면','비극의 결말이 일어나는 곳'],
+ desc:['도시의 하늘을 찌를 듯 솟아있는 웅장한 고딕 양식의 시계탑이다. 수도 아르덴 런던의 중심에 위치해 있으며, 밤이 되면 황금빛으로 빛나는 네 개의 거대한 시계면은 도시 어디에서나 시간을 확인할 수 있게 해주며, 달빛과 어우러져 신비로운 분위기를 자아낸다.','이 탑은 단순한 건축물을 넘어 제국을 상징하는 가장 유명한 랜드마크이다. 오랜 세월 동안 수많은 역사적 사건을 지켜봐 왔으며, 때로는 비극적인 사건의 결말이 일어나는 장소가 되기도 한다. 시계탑의 깊은 종소리는 도시의 흥망성쇠를 함께하며, 오늘도 변함없이 흐르는 시간을 알리고 있다.'],
+ people:[]}
+];
+/* ---------- i18n DATA : 인물 번역 (ko는 CHARS 원본) ---------- */
+const TRC={
+"en":{
+"eleanor":{"name":"Eleanor Harrington","tag":"Detective","line":"A detective who reconstructs cases in the fog from material evidence and causality","role":"Detective, Veritas Detective Agency",
+ "look":["Shoulder-length gray hair, with the back swept up in an elegant half-up style","Sharp yet captivating golden eyes","Doll-like, striking and refined beauty","Small, antique-style gold earrings","A voluptuous, well-defined figure"],
+ "outfit":["A brown plaid beret","A classic oversized camel trench coat","A crisp white shirt and black necktie","A black leather belt with a gold buckle and a high-waisted skirt","Black leather gloves"],
+ "trait":["Strips away emotion and reconstructs cases solely from material evidence and causality","With keen intuition and perfectionism, she tolerates not even a 1% error and sees the empire's grand conspiracies several moves ahead","Normally lacks empathy and speaks blunt truths, but enjoys teasing and chatting with an assistant she trusts"],
+ "feat":["Runs the ‘Veritas Detective Agency’ on Baker Street and is counted among the empire's most skilled detectives","Values a case's difficulty and interest over money, and leaves light cases to her assistant","Enjoys pipe smoking, so she always carries a pipe","Never gives up a commission once accepted, no matter the danger","Despises hypocritical, self-centered nobles and won't even glance at their requests","Clumsily but sincerely understands victims' feelings and uses them as fuel for her deductions"]},
+"alexander":{"name":"Alexander Hayson","tag":"Chief Inspector","line":"A Royal Police chief inspector who grumbles, yet ends up granting favors","role":"Chief Inspector, Criminal Investigation Division, Royal Police Department",
+ "look":["Dark brown long hair tied in a half-up style","Amber-tinged tawny eyes","Thick, distinct eyebrows and sharply upturned eyes","A light, short beard on the chin and around the mouth","Tall, with a solid, sturdy build","A cool, indifferent yet easygoing impression"],
+ "outfit":["A white shirt","A black necktie","A dark navy police uniform jacket","Black sunglasses","Gold buttons and a police badge"],
+ "trait":["Realistic and responsible, putting reason and efficiency first","Has a hot-tempered streak","Believes a sense of justice alone cannot change the world","Grumbles as though bothered when asked for help, yet ends up granting most requests"],
+ "feat":["A cooperative partner with a history with Eleanor","Smokes often","Oversees ordinary criminal investigations across the empire's districts, excluding the Black Raven Club where the nobles belong","Can review a detective's request and apply to the court for search and arrest warrants"]},
+"clara":{"name":"Clara Valentine","tag":"Informant","line":"A black-market informant who sells what she hears on the night streets, for a price","role":"Black-market informant",
+ "look":["Silvery-white hair falling past her waist","Low-tied twin tails","Blue eyes","Fair, clear skin","A slender, delicate frame","A mysterious yet mischievous air","Small, pointed fangs"],
+ "outfit":["A black fedora","A blue muffler","A black coat","A silver monocle","Black leather gloves","A black leather backpack","A white skirt"],
+ "trait":["Playful, and loves teasing people with wicked jokes","Adores money, and her eyes light up at anything profitable","Calculates profit and risk meticulously, always seeking the angle that favors her","Treats favors and cooperation as transactions, and is firm about terms and rewards"],
+ "feat":["Roams the streets every night, listening to and collecting countless pieces of information","Famous among detectives","Gives information in answer to your question, if you pay","Often appears in Whitechapel District and the black market"]},
+"lucas":{"name":"Lucas Winter","tag":"Forensic Analyst","line":"A forensic analyst who examines evidence calmly even at the grisliest scenes","role":"Forensic analyst, Royal Police Department",
+ "look":["Natural short cut of dark black hair","Blue eyes","Tousled hair with bangs slightly covering his eyes","Thin, sharply drawn eyes","Fair, clear skin","A calm, intellectual air","An indifferent yet cool-headed impression"],
+ "outfit":["A sky-blue shirt","A black necktie","A white lab coat","Silver-framed glasses","A white mask","Black slacks"],
+ "trait":["Logical and analytical, valuing objective facts and evidence","Misses no trace or minute difference, and finds a case's clues through meticulous observation","Stays unshaken even at horrific crime scenes, analyzing evidence calmly","Clumsy and curt at social chat and emotional comfort, but thorough and meticulous in his work"],
+ "feat":["Collects and analyzes evidence directly at crime scenes","Passes evidence straight to the detective or police officer in charge once it turns up"]},
+"rosy":{"name":"Rosy Miller","tag":"Baker","line":"The beloved owner of a Baker Street bakery that detectives, police and civilians alike visit","role":"Bakery owner on Baker Street",
+ "look":["Blonde hair, the back neatly pinned up and braided","Sharp yet captivating orange eyes","A beauty mark below her lip","A youthful face that looks far younger than her age","Doll-like, striking and refined beauty","A voluptuous, well-defined figure"],
+ "outfit":["A brown beret","A white blouse","A black ribbon tie set with an emerald-colored gem","White opera gloves","A long brown skirt"],
+ "trait":["Her natural warmth and energy brighten the people around her","Never loses her cheerful smile, responds warmly to what others say and do, and shows remarkable empathy","Speaks politely to everyone and is always kind"],
+ "feat":["Runs a famous bakery that everyone visits, whether detective, police officer or civilian","Popular with everyone","With so many people coming and going, she hears countless stories"]},
+"celestia":{"name":"Celestia Pendragon","tag":"Club Founder","line":"Behind a kindly face, the founder of the Black Raven Club dreams of seizing the empire","role":"Founder of the Black Raven Club",
+ "look":["Long, delicate silver wavy hair","The pale skin typical of albinism","White eyebrows and eyelashes","Dreamy violet eyes","An elegant, noble presence"],
+ "outfit":["A gorgeous pure-white off-the-shoulder dress","Long white lace dress gloves","An antique-style fan","White opera gloves","A silver tiara"],
+ "trait":["Outwardly wins everyone's trust with a thoroughly kind and virtuous manner, but in truth regards others purely as tools","Moves in every situation under rigorous calculation and meticulous planning","Reads the tide of events with rational judgment unswayed by emotion"],
+ "feat":["A member of the very highest of the noble houses","Harbors a grand ambition to seize the entire empire, far beyond ordinary power struggles among nobles","Has an elder brother named Cedric Pendragon","Never lifts a hand herself; she coordinates plans from behind the scenes and conceals her identity"]},
+"cedric":{"name":"Cedric Pendragon","tag":"House Heir","line":"A fencing master who backs his sister's plans with force","role":"Heir of the Pendragon house",
+ "look":["Silver hair in a Gail cut","The pale skin typical of albinism","White eyebrows and eyelashes","Dreamy violet eyes","A firm impression with a cynical, arrogant air"],
+ "outfit":["A blue noble's uniform","Gold embroidery and ornate silver epaulettes","A cape trimmed with white fur","Black leather gloves"],
+ "trait":["Arrogant, regarding those of low rank as less than insects","A cold-blooded realist unswayed by emotion","Ruthless, willing to use any means to reach his goal","Dotes on his younger sister and will follow any course for the sake of her goals"],
+ "feat":["A member of the very highest of the noble houses","Has a younger sister named Celestia Pendragon","Backs his sister from behind with force and the family's power so that her plan is carried out flawlessly","An outstanding fencer whose martial strength surpasses that of ordinary people"]}
+},
+"ja":{
+"eleanor":{"name":"エレノア・ハリントン","tag":"探偵","line":"物的証拠と因果関係だけで霧の中の事件を再構成する探偵","role":"ヴェリタス探偵事務所 探偵",
+ "look":["肩ほどまでの灰色の髪を、後ろで丁寧にまとめたハーフアップ","鋭くも魅惑的な金色の瞳","人形のようにくっきりと華やかな、洗練された美人顔","耳に着けた小さく古風な金色のイヤリング","ボリュームのある立体的なボディライン"],
+ "outfit":["ブラウンのタータンチェックのベレー帽","クラシックなキャメル色のオーバーサイズのトレンチコート","きちんとした白いシャツと黒いネクタイ","金色のバックルが付いた黒革のベルトとハイウエストのスカート","黒革の手袋"],
+ "trait":["感情を徹底的に排し、物的証拠と因果関係だけを基に事件を再構成する","鋭い直感と完璧主義で1%の誤りも許さず、帝国全体の陰謀を何手も先まで見通す","普段は共感力に欠け、歯に衣着せぬ直言を放つが、信頼する助手には、さりげなくからかったり会話を楽しんだりする"],
+ "feat":["ベイカー街にある「ヴェリタス探偵事務所」を運営し、帝国屈指の腕利き探偵である","金銭的な対価よりも事件の難度と面白さを優先し、軽い事件は助手に任せる","パイプ煙草を好むため、常に持ち歩いている","一度引き受けた依頼は、どんな危険があっても決して諦めない鉄則を持つ","偽善的で自己中心的な貴族を非常に嫌い、彼らの依頼は見向きもしない","被害者の感情を不器用ながらも理解しようとし、推理の原動力にする"]},
+"alexander":{"name":"アレクサンダー・ヘイソン","tag":"捜査警視","line":"文句を言いながらも、結局は頼みを聞いてくれる王立警察庁の捜査警視","role":"王立警察庁 刑事局 捜査警視",
+ "look":["濃い茶色のハーフアップの長髪","琥珀色がかった黄褐色の瞳","濃くはっきりした眉と、鋭く上がった目元","顎と口元に薄く伸びた短い髭","長身でがっしりとした頑丈な体格","冷静で無頓着ながらも余裕のある印象"],
+ "outfit":["白いシャツ","黒いネクタイ","濃紺の警察制服のジャケット","黒いサングラス","金色のボタンと警察バッジ"],
+ "trait":["現実的で責任感が強く、理性と効率を優先する","短気な一面がある","正義感だけでは世界を変えられないと考えている","頼まれると面倒くさそうにぼやきつつも、結局ほとんど聞き入れてくれる"],
+ "feat":["エレノアと縁のある協力関係","よく煙草を吸う","貴族が所属するブラック・レイヴン・クラブを除く、ブリタニア帝国の各区域における一般犯罪捜査を統括","探偵の要請を検討し、裁判所に捜索令状・逮捕状の発付を申請できる"]},
+"clara":{"name":"クララ・ヴァレンタイン","tag":"情報屋","line":"金さえ払えば、夜の街で集めた情報を売ってくれるブラックマーケットの情報屋","role":"ブラックマーケットの情報屋",
+ "look":["腰より下まで届く銀白色の長髪","低く結んだツインテールスタイル","青い瞳","白く澄んだ肌","細くて華奢な体つき","神秘的でありながら悪戯っぽい雰囲気","小さく尖った八重歯"],
+ "outfit":["黒いフェドーラ帽","青いマフラー","ブラックコート","銀色のモノクル","黒革の手袋","黒革のバックパック","白いスカート"],
+ "trait":["いたずら好きで、意地悪な冗談で相手をからかうのを楽しむ","お金が大好きで、利益になる話には目を輝かせる","損得とリスクを細かく計算し、常に自分に有利な方向を探る","頼み事や協力を取引のように捉え、条件と報酬をきっちり確認する方"],
+ "feat":["毎晩街を歩き回り、数多くの情報を聞き集める","探偵たちの間で有名","お金を払えば、質問に関する情報をくれる","ホワイトチャペル地区やブラックマーケットによく現れる"]},
+"lucas":{"name":"ルーカス・ウィンター","tag":"鑑識官","line":"凄惨な現場でも冷静に証拠を分析する鑑識官","role":"王立警察庁 鑑識官",
+ "look":["濃い黒髪の自然なショートカット","青い瞳","前髪が目元に少しかかる、乱れた髪型","細く鋭く伸びた目元","白く澄んだ肌","落ち着いた知的な雰囲気","無頓着でありながら冷徹な印象"],
+ "outfit":["空色のシャツ","黒いネクタイ","白い白衣","銀縁の眼鏡","白いマスク","黒いスラックス"],
+ "trait":["論理的で分析的な思考の持ち主で、客観的な事実と根拠を重んじる","ささいな痕跡や微細な違いも見逃さず、緻密な観察から事件の手がかりを見つけ出す","凄惨な犯罪現場でも感情的に動揺せず、冷静に証拠を分析する","社交的な会話や感情的な慰めは苦手で無愛想だが、仕事だけは丁寧かつ徹底的にこなす"],
+ "feat":["事件現場で証拠物を自ら収集し、分析する","証拠が出ると、すぐに担当の探偵や警察に引き渡す"]},
+"rosy":{"name":"ロージー・ミラー","tag":"パン屋の店主","line":"探偵も警察も民間人も訪れる、ベイカー街の人気パン屋の店主","role":"ベイカー街のパン屋の店主",
+ "look":["金髪を後ろで丁寧に結い上げて編み込んだヘアスタイル","鋭くも魅惑的なオレンジ色の瞳","唇の下のほくろ","年齢よりずっと若く見える童顔","人形のようにくっきりと華やかな、洗練された美人顔","ボリュームのある立体的なボディライン"],
+ "outfit":["茶色のベレー帽","白いブラウス","エメラルド色の宝石が付いた黒いリボンタイ","白いオペラグローブ","茶色のロングスカート"],
+ "trait":["持ち前の温かさと活力で、周りの雰囲気を明るくする","いつも明るい笑顔を絶やさず、他人の言動に寄り添い、優れた共感力を見せる","誰に対しても敬語を使い、いつも親切である"],
+ "feat":["探偵、警察、民間人を問わず誰もが訪れる有名なパン屋を営んでいる","すべての人に人気がある","多くの人が行き交うだけに、数え切れないほどの話が耳に入る"]},
+"celestia":{"name":"セレスティア・ペンドラゴン","tag":"クラブ創設者","line":"優しげな顔の裏で帝国の掌握を目論む、ブラック・レイヴン・クラブの創設者","role":"ブラック・レイヴン・クラブ創設者",
+ "look":["長く繊細な銀髪のウェーブヘア","アルビノ特有の白い肌","白い眉とまつ毛","夢幻的な紫色の瞳","優雅で気高い印象"],
+ "outfit":["華やかな純白のオフショルダードレス","白く長いレースのドレスグローブ","古風な扇","白いオペラグローブ","銀色のティアラ"],
+ "trait":["表向きはあらゆる優しさと善良な態度で周囲の信望を得ているが、実際は他人を徹底的に手段としてしか見ていない","あらゆる状況を、徹底した計算と緻密な計画のもとで動かす","感情に揺らがない合理的な判断力で、形勢を読む"],
+ "feat":["貴族の家門の中でも最上位の名門の人物","単なる貴族同士の権力争いを超え、帝国全体を掌握しようとする巨大な野望を抱いている","セドリック・ペンドラゴンという名の実兄がいる","決して自らは手を下さず、徹底して裏方から計画を調整し、自身の正体を隠す"]},
+"cedric":{"name":"セドリック・ペンドラゴン","tag":"家門の後継者","line":"妹の計画を武力で支える、フェンシングの達人","role":"ペンドラゴン家の後継者",
+ "look":["銀髪のゲイルカット","アルビノ特有の白い肌","白い眉とまつ毛","夢幻的な紫色の瞳","冷笑的で傲慢な雰囲気を漂わせる、堅固な印象"],
+ "outfit":["青い貴族の制服","金糸の刺繍と華やかな銀色の肩章","白い毛皮の飾りが付いたマント","黒革の手袋"],
+ "trait":["身分の低い人間を虫けら以下に見なす傲慢な態度","感情に流されない冷酷な現実主義者","目的のためなら手段を選ばない残忍な性格","妹を極度に大切にし、彼女の目標のためならどんなことにも従おうとする"],
+ "feat":["貴族の家門の中でも最上位の名門の人物","セレスティア・ペンドラゴンという名の妹がいる","妹の計画が完璧に成し遂げられるよう、裏から武力と家門の権力を動員して支える","優れたフェンシングの使い手であり、武力も一般人より強い"]}
+}
+};
+
+/* ---------- i18n DATA : 지역 번역 (ko는 LOCS 원본) ---------- */
+const TRL={
+"en":{
+"whitechapel":{"name":"Whitechapel District","region":"Outside the capital, Arden London","sum":"The empire's most marginalized slum. Its fog is the thickest, and serial murders and disappearances never cease.","tags":["A village of the poor","The thickest fog","A blind spot in public order"],
+ "desc":["A village of the empire's most marginalized poor, lying outside the borders of the capital, Arden London. Dilapidated brick buildings are tangled together without order, and it is a gloomy district where the fog hangs thicker and eerier than anywhere else in the empire.","Lying in a blind spot of public order, it is also a notorious lawless zone where serial murders and disappearances never stop. Crime and danger lurk in every dark alley that gaslight scarcely reaches, and even ordinary police are reluctant to set foot in this rough, desolate neighborhood."]},
+"greywood":{"name":"Greywood Cemetery","region":"At the edge of the capital, Arden London","sum":"The final resting place of the nobility. A forgotten secret passage hides beneath the ivy.","tags":["Resting place of nobles","A forgotten secret passage","Closed to the public at night"],
+ "desc":["Greywood Cemetery lies at the far edge of the capital, Arden London: a vast graveyard tucked into the city's most antique and secluded corner, and the final resting place of the nobility of old. Intricate stone gravestones worn by the passing years and giant angel statues line the grounds, creating an atmosphere both eerie and solemn. At night, only faint gaslight and pale moonlight illuminate this eternal silence.","It is no mere land of the dead. Beneath the lush ivy and moss lies a forgotten secret passage, which at times becomes a route for forbidden dealings and clandestine trysts. Because of this secret the public is barred at night, yet that very stillness and secrecy lure dangerous people. It is a place of both historical value and mysterious atmosphere."]},
+"club":{"name":"Black Raven Club","region":"Arden London, the capital","sum":"Behind the face of a refined noble social club, a secret organization holds its gatherings.","tags":["Upper-class members only","Gatherings of a secret organization","Information trading and schemes"],
+ "desc":["An exclusive social club for the upper class, located in Arden London, capital of the empire. Its splendid, intricate Gothic exterior and golden lighting symbolize the lavish power and wealth of the capital's nobles. Carriages come and go ceaselessly, and on the surface it is a place where refined aristocrats hold friendly gatherings.","Behind the dazzling lights, however, a powerful secret organization meets, where high politics and covert crime are intricately entwined. From clandestine information trading to schemes that shake the fate of the nation, the empire's darkest secrets are decided inside this resplendent club. It is a hidden place where the pinnacle of high society and the ugly underside of the powerful coexist."]},
+"baker":{"name":"Baker Street","region":"Central Arden London","sum":"A street packed with detective agencies, where cases begin and end every day.","tags":["Mecca of detective agencies","Red brick and gaslight","Where cases begin and end"],
+ "desc":["A symbolic street in the heart of Arden London, capital of the empire. Lined with red brick and intricate Gothic buildings, it preserves the antique, lively atmosphere of the Victorian age. When the gaslights come on along the street, a dreamy and mysterious scene unfolds.","The street is called the ‘mecca of detective agencies’ for the sheer number of agencies clustered there. Clients from all over the empire visit it most, and it is where cases both begin and end, as commissions are made and solved every day. It is a quiet bastion of imperial order, where the wisdom and reasoning of detectives live and breathe."]},
+"arden":{"name":"Arden London","region":"Capital of the Britannia Empire","sum":"The imperial capital and the center of politics, economy and culture. A city of fog where prosperity and schemes grow side by side.","tags":["Imperial capital","Center of politics, economy and culture","Gaslight and night fog"],
+ "desc":["The capital of the Britannia Empire and its center of politics, economy and culture. Majestic Gothic stone buildings stretch endlessly, and the thick fog that rolls in without fail at night, blended with the soft yellow glow of gaslights within it, creates a distinctively antique and mysterious atmosphere. True to its role as the heart of the empire, it is crowded with the lavish mansions and social clubs of upper-class nobles who wield enormous wealth, and with its overwhelming views by day and night it is a symbolic city that best shows the empire's prosperity.","In the morning, Arden London takes on the face of a lively metropolis as the fog lifts; but once the sun sets and the curtain of night falls, bizarre disappearances, brutal murders and ugly political schemes quietly rise out of the fog, where nothing can be made out."]},
+"rpd":{"name":"Royal Police Department","region":"Arden London, the capital","sum":"The state agency that symbolizes imperial authority (RPD). It works with private detectives on complex cases.","tags":["The empire's law enforcement agency","Detectives, forensics, holding cells","Cooperation with private detectives"],
+ "desc":["The Royal Police Department, RPD for short, is the state agency in charge of public order, located in the capital, Arden London. Boasting a majestic, authoritative stone exterior, it is systematically equipped inside with detectives who investigate cases, a forensics unit that analyzes the scenes, evidence rooms, and holding cells for criminals. Though it symbolizes the empire's vast public authority, it is said that high-ranking nobles occasionally bribe their way into having crimes or cases handed over to them.","These are the minority of cases, however. Usually the police resolve cases themselves, but since there is a limit to how many complex and bizarre cases they can solve, they sometimes investigate in cooperation with private detectives."]},
+"crow":{"name":"Crow Harbour","region":"On the edge of the Britannia Empire","sum":"A vast port city on the empire's frontier: industry by day, smuggling and black markets by night.","tags":["On the empire's edge","Smuggling and black markets","Two faces, day and night"],
+ "desc":["A vast port city on the edge of the Britannia Empire. Far from the empire's center, Arden London, it has nevertheless built its own system of order thanks to the endless flow of people and goods. Here too, holding cells and the footsteps of patrolling police never cease.","It is a lively place where countless industries intersect, yet it also harbors a darkness in which smuggling and black markets flourish, so that its day and night faces are entirely different. That is why it is the first stage that detectives and police chasing leads set foot on to gather evidence and testimony."]},
+"tower":{"name":"Royal Clock Tower","region":"Center of the capital, Arden London","sum":"A towering Gothic clock tower piercing the sky: the empire's most famous landmark.","tags":["The empire's landmark","Four golden clock faces","Where tragic endings unfold"],
+ "desc":["A majestic Gothic clock tower soaring as if to pierce the sky above the city. Standing at the center of the capital, Arden London, its four enormous clock faces glow golden at night, letting people tell the time from anywhere in the city, and blend with the moonlight to create a mysterious atmosphere.","The tower is more than a building: it is the most famous landmark symbolizing the empire. Over the long years it has watched countless historical events, and at times it becomes the site where the end of a tragic case unfolds. The tower's deep bell tolls alongside the rise and fall of the city, still announcing the unchanging flow of time today."]}
+},
+"ja":{
+"whitechapel":{"name":"ホワイトチャペル地区","region":"首都アーデン・ロンドンの境界の外","sum":"帝国で最も見捨てられた貧困層の町。霧が最も濃く、連続殺人と失踪が絶えない。","tags":["貧困層の町","最も濃い霧","治安の死角"],
+ "desc":["首都アーデン・ロンドンの境界の外に位置する、帝国で最も見捨てられた貧困層の町である。古びてみすぼらしい煉瓦造りの建物が無秩序に絡み合い、帝国全土で最も霧が濃く陰鬱に立ち込める、暗い地域だ。","治安の死角にあり、連続殺人や失踪事件が絶えない悪名高き無法地帯でもある。ガス灯の明かりさえまともに届かない暗い路地のあちこちに犯罪と危険が潜み、一般の警察でさえ足を踏み入れるのをためらう、荒涼とした荒れた町だ。"]},
+"greywood":{"name":"グレイウッド墓地","region":"首都アーデン・ロンドンの外れ","sum":"貴族たちの最後の安息の地。蔦の下に、忘れられた秘密の通路が隠れている。","tags":["貴族たちの安息の地","忘れられた秘密の通路","夜間は立入制限"],
+ "desc":["首都アーデン・ロンドンの外れに位置するグレイウッド墓地(Greywood Cemetery)は、都市で最も古風で人目につかない一角にある巨大な墓地で、かつての貴族たちの最後の安息の地である。歳月に摩耗した精巧な石の墓碑と巨大な天使像が立ち並び、不気味でありながら荘厳な雰囲気を醸し出している。夜になると、淡いガス灯の明かりと青白い月光だけが、この永遠の静寂を照らす。","ここは単なる死者の土地ではない。生い茂る蔦と苔の下には忘れられた秘密の通路が存在し、この通路はときに禁じられた取引や密会の通り道となる。この秘密のため、夜間は一般人の立入が制限されるが、その静けさと隠密さがかえって危険な者たちを誘う。歴史的価値と神秘的な雰囲気を併せ持つ場所である。"]},
+"club":{"name":"ブラック・レイヴン・クラブ","region":"首都アーデン・ロンドン","sum":"上品な貴族の社交クラブという顔の裏で、秘密組織の会合が開かれる。","tags":["上流階級専用","秘密組織の会合","情報取引と陰謀"],
+ "desc":["帝国の首都アーデン・ロンドンにある上流階級専用の社交クラブである。華やかで精巧なゴシック様式の外観と黄金色の照明は、首都の貴族たちの豪奢な権力と富を象徴している。馬車がひっきりなしに出入りするここは、表向きには上品な貴族たちの親睦の集まりが開かれる場所だ。","しかし、まばゆい照明の裏側では、高位の政治と秘められた犯罪が複雑に絡み合う強大な秘密組織の会合が行われている。秘密裏の情報取引から国の命運を揺るがす陰謀まで、帝国の最も暗い秘密が、この華やかなクラブの中で決められる。華やかな社交界の頂点と、権力層の醜い裏の顔が共存する秘められた場所である。"]},
+"baker":{"name":"ベイカー街","region":"首都アーデン・ロンドンの中心部","sum":"探偵事務所が密集する通り。毎日、事件の依頼と解決が行われる始まりであり終着点。","tags":["探偵事務所のメッカ","赤煉瓦とガス灯","事件の始まりと終着点"],
+ "desc":["帝国の首都アーデン・ロンドンの中心部に位置する象徴的な通りである。赤煉瓦と精巧なゴシック様式の建物が立ち並び、ヴィクトリア朝時代の古風で活気ある雰囲気をそのまま残している。通りのあちこちにガス灯が灯ると、夢幻的で神秘的な風景が広がる。","この通りは「探偵事務所のメッカ」と呼ばれるほど、数多くの探偵事務所が密集している。そのため帝国全土から依頼人が最も多く訪れ、毎日大小の事件の依頼と解決が行われる、事件の始まりであり終着点でもある。探偵たちの知恵と推理が息づく、帝国の治安の秘められた砦だ。"]},
+"arden":{"name":"アーデン・ロンドン","region":"ブリタニア帝国の首都","sum":"帝国の首都であり、政治・経済・文化の中心。繁栄と陰謀がともに育つ霧の都市。","tags":["帝国の首都","政治・経済・文化の中心","ガス灯と夜霧"],
+ "desc":["ブリタニア帝国の首都であり、政治、経済、文化の中心地である。壮大なゴシック様式の石造建築が果てしなく立ち並び、夜になると必ず押し寄せる濃い霧と、その中をほのかに照らす黄色いガス灯の光が溶け合って、独特の古風で神秘的な雰囲気を醸し出す。帝国の心臓部らしく、莫大な富を握る上流貴族たちの華やかな大邸宅や社交クラブが密集しており、昼と夜が織りなす圧倒的な景観によって、帝国の繁栄を最もよく表す象徴的な都市である。","朝のアーデン・ロンドンは、霧が晴れて活気ある大都市の顔を見せるが、日が沈んで夜の帳が下りると、四方の見分けもつかない霧の中から、不可解な失踪や残忍な殺人事件、醜い政治的陰謀が音もなく立ちのぼる。"]},
+"rpd":{"name":"王立警察庁","region":"首都アーデン・ロンドン","sum":"帝国の公権力を象徴する治安機関(RPD)。複雑な事件は民間の探偵とともに捜査する。","tags":["帝国の治安機関","刑事・鑑識班・留置場","民間探偵との協力"],
+ "desc":["王立警察庁(Royal Police Department)。略してRPDと呼ばれるここは、首都アーデン・ロンドン内にある帝国の治安を担う国家機関である。壮大で権威ある石造建築の外観を誇り、内部には事件を捜査する刑事たち、現場を分析する鑑識班、証拠保管室、そして犯罪者を収容する留置場などが体系的に備わっている。帝国の巨大な公権力を象徴する場所だが、時には上層の貴族が金で買収し、犯罪や事件を引き渡させることもあるという。","だが、それはごく一部の場合であり、普段は警察庁が事件を解決する。しかし複雑で奇怪な事件のすべてを解決するには限界があり、ときには民間の探偵たちと協力して捜査を進めることもある。"]},
+"crow":{"name":"クロウ港","region":"ブリタニア帝国の外縁","sum":"帝国の辺境にある巨大な港湾都市。昼は産業の活気、夜は密輸と闇市。","tags":["帝国の外縁","密輸と闇市","昼と夜で異なる顔"],
+ "desc":["ブリタニア帝国の外縁に位置する巨大な港湾都市。帝国の中心であるアーデン・ロンドンからは遠いが、絶え間なく押し寄せる人と物資のおかげで、独自の治安体制を整えている。ここでも治安維持のための留置場と、巡回する警官たちの足音が絶えない。","数多くの産業が活発に交差する活気ある場所であると同時に、密輸と闇市が横行する闇を抱えており、昼と夜でまったく違う顔を見せる。そのため、事件の手がかりを追う探偵や刑事たちが、証拠と証言を集めるために真っ先に足を踏み入れる舞台でもある。"]},
+"tower":{"name":"王立時計塔","region":"首都アーデン・ロンドンの中心","sum":"都市の空を突くようにそびえるゴシック様式の時計塔。帝国を象徴する最も有名なランドマーク。","tags":["帝国のランドマーク","黄金色に輝く四つの文字盤","悲劇の結末が起こる場所"],
+ "desc":["都市の空を突くようにそびえ立つ、壮大なゴシック様式の時計塔である。首都アーデン・ロンドンの中心に位置し、夜になると黄金色に輝く四つの巨大な文字盤は、都市のどこからでも時刻を確かめられるようにしてくれ、月光と溶け合って神秘的な雰囲気を醸し出す。","この塔は単なる建築物を超え、帝国を象徴する最も有名なランドマークである。長い歳月、数多くの歴史的事件を見守ってきて、ときには悲劇的な事件の結末が起こる場所にもなる。時計塔の深い鐘の音は、都市の興亡とともにあり、今日も変わることなく流れる時を告げている。"]}
+}
+};
+
+/* ---------- i18n DATA : UI 사전 ---------- */
+/* D : HTML의 data-i / data-ia 로 연결되는 문구 (ko는 HTML 원문을 그대로 사용) */
+const D={
+"en":{
+"skip":"Skip to content",
+"l.sub":"Classified Archives of the Britannia Empire",
+"l.enter":"Enter Archives","l.enter2":"",
+"l.note":"Background music will play when you enter.",
+"a.landing":"Start screen","a.brand":"Veritas Detective Agency, back to top","a.nav":"Main menu","a.audio":"Background music controls","a.lang":"Language",
+"nav.world":"World","nav.world.s":"The Empire","nav.chars":"Characters","nav.chars.s":"Dramatis Personae","nav.locs":"Locations","nav.locs.s":"Places of Note",
+"audio.vol":"Volume",
+"sec.world":"World","w.lead":"An empire where dazzling prosperity and cruelty coexist, drowned in fog every night",
+"w.tab":"Imperial Overview","w.stamp":"TOP SECRET","w.t":"Britannia Empire","w.t.s":"",
+"w.p1":"The Britannia Empire is a European-style realm where dazzling prosperity and cruel undercurrents live side by side. Politics and commerce thrive to the extreme, and the aristocrats who hold power live in luxury, while in their shadow the poor line up in dense rows, barely surviving each day.",
+"w.p2":"The empire's defining feature is the thick fog that swallows the entire city every night, all year round. By morning the fog lifts a little and the city can breathe, but once the sun sets, a world of darkness and fog descends again, leaving nothing distinguishable.",
+"w.pull":"Once the sun sets, a world of darkness and fog descends again, and nothing can be told apart.",
+"w.p3":"Beneath this uncanny curtain of night, the empire groans under unending crime. Brutal serial murders, bizarre disappearances and the ugly political schemes of the nobility erupt every single day.",
+"w.p4":"The authority of a bureaucracy-ridden police force cannot resolve such vast chaos, so cool-headed detectives, who dig out the truth hidden in the fog and solve the mysteries in the blind spots, have become indispensable to the empire.",
+"w.slip":"The Empire at a Glance",
+"f.fog":"Fog","f.fog.d":"All year round; it blankets the whole city after dark",
+"f.cap":"Capital","f.up":"Elite","f.up.d":"Noble mansions and social clubs","f.poor":"Poor",
+"f.law":"Law","f.law.d":"Royal Police Department (RPD)","f.req":"Cases","f.req.d":"Detective agencies on Baker Street",
+"dn.h":"A Day in Arden London","a.seg":"Time of day","dn.btn.day":"Morning","dn.btn.night":"Night","dn.link":"View Arden London details",
+"w.powers":"The Powers Behind the Empire",
+"pw.club.p":"Outwardly, a society club where refined nobles gather. Behind the dazzling lights, however, a powerful secret organization holds its meetings, where high politics and covert crime intertwine, and schemes that shake the fate of the nation are decided inside the club.",
+"pw.club.l":"View Black Raven Club details",
+"pw.rpd.s":"",
+"pw.rpd.p1":"Known as the RPD for short, the empire's state agency for public order. It is well equipped with detectives, a forensics unit, evidence rooms and holding cells, but it cannot resolve every complex and bizarre case on its own, so it often investigates in cooperation with private detectives.",
+"pw.rpd.p2":"It is said that high-ranking nobles occasionally bribe their way into having crimes or cases handed over to them.",
+"pw.rpd.l":"View Royal Police Department details",
+"pw.ag.h":"Detective Agencies",
+"pw.ag.p":"Private investigation firms that take on cases arising across the empire. They act as fixers for the work that lies beyond the reach of the imperial police.",
+"pw.ag.li1":"Covert murders and disappearances","pw.ag.li2":"Ugly scandals of the nobility","pw.ag.li3":"Smuggling cases at Crow Harbour",
+"pw.ag.l":"See Baker Street, home of the agencies",
+"pw.wh.p":"A village of the empire's most marginalized poor, outside the capital. In alleys that not even gaslight reaches, crime and danger lurk, and even ordinary police hesitate to set foot.",
+"pw.wh.l":"View Whitechapel District details",
+"sec.chars":"Characters","c.lead":"Detectives and police, an informant, and the noble siblings who covet the empire. Choose a portrait to open the dossier.",
+"a.roster":"Select a character","c.prev":"Previous","c.next":"Next",
+"sec.locs":"Locations","l.lead":"Select a marker on the old map or a framed picture below to open the record of that place.",
+"a.map":"An old map of Arden London and its surroundings","a.locidx":"Places","m.prev":"Previous place","m.next":"Next place",
+"a.lb":"View larger image","a.close":"Close",
+"foot.note":"This site presents setting material for the fictional world of the ‘Britannia Empire’.","foot.top":"Back to top"
+},
+"ja":{
+"skip":"本文へスキップ",
+"l.sub":"ブリタニア帝国 機密文書庫",
+"l.enter":"入場する","l.enter2":"Enter Archives",
+"l.note":"入場すると、BGMが流れます。",
+"a.landing":"スタート画面","a.brand":"ヴェリタス探偵事務所、トップへ","a.nav":"メインメニュー","a.audio":"BGMコントロール","a.lang":"言語",
+"nav.world":"世界観","nav.world.s":"World","nav.chars":"主要人物","nav.chars.s":"Characters","nav.locs":"主要地域","nav.locs.s":"Locations",
+"audio.vol":"音量",
+"sec.world":"世界観","w.lead":"華やかな繁栄と残酷な裏の顔が共存する、夜ごと霧に沈む帝国",
+"w.tab":"帝国概要","w.stamp":"極秘","w.t":"ブリタニア帝国","w.t.s":"Britannia Empire",
+"w.p1":"ブリタニア帝国は、華やかな繁栄と残酷な裏の顔が共存するヨーロッパ風の帝国である。政治と経済が極めて活発で、権力を握る上流貴族たちが贅沢三昧に暮らす一方、その影の下では、その日を生き延びるのがやっとの貧困層がひしめき合っている。",
+"w.p2":"この帝国の最大の特徴は、一年三百六十五日、毎夜のように都市全体を呑み込むほど濃く立ち込める霧だ。朝になれば霧はいくらか晴れて息がつけるが、日が沈めばふたたび、四方の見分けもつかない闇と霧の世界が訪れる。",
+"w.pull":"日が沈めば、ふたたび四方の見分けもつかない闇と霧の世界が訪れる。",
+"w.p3":"この奇怪な夜の帳の中で、帝国は絶え間ない犯罪に呻いている。残忍な連続殺人、不可解な失踪、貴族たちの醜い政治的陰謀まで、ありとあらゆる事件が毎日のように起こる。",
+"w.p4":"官僚主義に染まった一般の警察の公権力では、この巨大な混沌を解決できない。そのため、霧に隠された真実を暴き、死角のミステリーを解き明かす冷徹な探偵たちが、帝国に欠かせない存在として根づいた。",
+"w.slip":"帝国の概況",
+"f.fog":"霧","f.fog.d":"一年中、日没後に都市全体を覆う",
+"f.cap":"首都","f.up":"上流層","f.up.d":"貴族の大邸宅と社交クラブ","f.poor":"貧困層",
+"f.law":"治安","f.law.d":"王立警察庁(RPD)","f.req":"依頼","f.req.d":"ベイカー街の探偵事務所",
+"dn.h":"アーデン・ロンドンの一日","a.seg":"時間帯の選択","dn.btn.day":"朝","dn.btn.night":"夜","dn.link":"アーデン・ロンドンの詳細を見る",
+"w.powers":"帝国を動かす力",
+"pw.club.p":"表向きは上品な貴族たちが親睦を深める上流階級専用の社交クラブ。しかし、まばゆい照明の裏側では、高位の政治と秘められた犯罪が絡み合う強大な秘密組織の会合が行われ、国の命運を揺るがす陰謀がこのクラブの中で決められる。",
+"pw.club.l":"ブラック・レイヴン・クラブの詳細を見る",
+"pw.rpd.s":"Royal Police Department",
+"pw.rpd.p1":"略してRPDと呼ばれる、帝国の治安を担う国家機関。刑事、鑑識班、証拠保管室、留置場を体系的に備えているが、複雑で奇怪な事件のすべてを解決するには限界があり、しばしば民間の探偵と協力して捜査を進める。",
+"pw.rpd.p2":"時には上層の貴族が金で買収し、犯罪や事件を引き渡させることもあるという。",
+"pw.rpd.l":"王立警察庁の詳細を見る",
+"pw.ag.h":"探偵事務所",
+"pw.ag.p":"帝国で起こる事件を依頼を受けて解決する民間の調査機関。帝国警察の手が届かない仕事を引き受ける解決屋の役割を果たす。",
+"pw.ag.li1":"秘密裏の殺人・失踪事件","pw.ag.li2":"貴族たちの醜いスキャンダル","pw.ag.li3":"クロウ港の密輸事件",
+"pw.ag.l":"探偵事務所が集まるベイカー街を見る",
+"pw.wh.p":"首都の外れにある、帝国で最も見捨てられた貧困層の町。ガス灯の明かりさえ届かない路地ごとに犯罪と危険が潜み、一般の警察でさえ足を踏み入れるのをためらう。",
+"pw.wh.l":"ホワイトチャペル地区の詳細を見る",
+"sec.chars":"主要人物","c.lead":"探偵と警察、情報屋、そして帝国を狙う貴族の兄妹。肖像を選ぶと人物調書が開きます。",
+"a.roster":"人物を選択","c.prev":"前の人物","c.next":"次の人物",
+"sec.locs":"主要地域","l.lead":"古地図の印か下の額縁を選ぶと、その地域の記録が開きます。",
+"a.map":"アーデン・ロンドンと周辺地域を描いた古地図","a.locidx":"地域一覧","m.prev":"前の地域","m.next":"次の地域",
+"a.lb":"画像を拡大表示","a.close":"閉じる",
+"foot.note":"このサイトは、架空の世界観「ブリタニア帝国」を紹介する設定資料です。","foot.top":"ページの先頭へ"
+}
+};
+
+/* S : 스크립트가 직접 쓰는 문구 (ko 포함). {n} 은 이름 자리 */
+const S={
+"ko":{"blk.basic":"기본 정보","blk.look":"외형","blk.outfit":"착장","blk.trait":"성격","blk.feat":"특징",
+ "lbl.gender":"성별","lbl.age":"나이","lbl.height":"신장","lbl.weight":"체중","lbl.role":"직위","g.f":"여성","g.m":"남성","age":"{n}세",
+ "rel.people":"관련 인물","rel.places":"관련 장소","zoom":"{n} 이미지 크게 보기","portrait":"{n} 초상","pin":"{n} 상세 보기","locimg":"{n} 전경","lbimg":"{n} 이미지",
+ "dn.day":"아침의 아르덴 런던은 안개가 걷히며 활기찬 대도시의 얼굴을 띤다.",
+ "dn.night":"해가 지고 밤의 장막이 내리면 사방을 분간할 수 없는 안개 속에서 온갖 기괴한 실종과 잔혹한 살인 사건, 추악한 정치적 음모가 소리 없이 피어오른다.",
+ "au.play":"배경음악 재생","au.pause":"배경음악 일시정지","au.mute":"음소거","au.unmute":"음소거 해제","t.play":"재생","t.pause":"일시정지",
+ "au.err":"배경음악(BGM.mp3)을 재생하지 못했습니다. 파일이 index.html과 같은 폴더에 있는지 확인해 주세요.",
+ "miss":"이미지를 찾을 수 없습니다","title.m":"VERITAS DETECTIVE AGENCY / BRITANNIA ARCHIVES"},
+"en":{"blk.basic":"Basic Info","blk.look":"Appearance","blk.outfit":"Attire","blk.trait":"Personality","blk.feat":"Features",
+ "lbl.gender":"Gender","lbl.age":"Age","lbl.height":"Height","lbl.weight":"Weight","lbl.role":"Position","g.f":"Female","g.m":"Male","age":"{n}",
+ "rel.people":"Related people","rel.places":"Related places","zoom":"View {n} larger","portrait":"Portrait of {n}","pin":"View details of {n}","locimg":"View of {n}","lbimg":"Image of {n}",
+ "dn.day":"The morning fog lifts and Arden London shows the face of a lively metropolis.",
+ "dn.night":"When the sun sets and the curtain of night falls, bizarre disappearances, brutal murders and ugly political schemes quietly rise out of the fog, where nothing can be seen clearly.",
+ "au.play":"Play background music","au.pause":"Pause background music","au.mute":"Mute","au.unmute":"Unmute","t.play":"Play","t.pause":"Pause",
+ "au.err":"Couldn't play the background music (BGM.mp3). Check that the file is in the same folder as index.html.",
+ "miss":"Image not found","title.m":"Veritas Detective Agency / Britannia Archives"},
+"ja":{"blk.basic":"基本情報","blk.look":"外見","blk.outfit":"服装","blk.trait":"性格","blk.feat":"特徴",
+ "lbl.gender":"性別","lbl.age":"年齢","lbl.height":"身長","lbl.weight":"体重","lbl.role":"職位","g.f":"女性","g.m":"男性","age":"{n}歳",
+ "rel.people":"関連人物","rel.places":"関連場所","zoom":"{n}の画像を拡大","portrait":"{n}の肖像","pin":"{n}の詳細を見る","locimg":"{n}の全景","lbimg":"{n}の画像",
+ "dn.day":"朝のアーデン・ロンドンは霧が晴れ、活気ある大都市の顔を見せる。",
+ "dn.night":"日が沈み夜の帳が下りると、四方の見分けもつかない霧の中から、不可解な失踪や残忍な殺人事件、醜い政治的陰謀が音もなく立ちのぼる。",
+ "au.play":"BGMを再生","au.pause":"BGMを一時停止","au.mute":"ミュート","au.unmute":"ミュート解除","t.play":"再生","t.pause":"一時停止",
+ "au.err":"BGM(BGM.mp3)を再生できませんでした。ファイルがindex.htmlと同じフォルダにあるか確認してください。",
+ "miss":"画像が見つかりません","title.m":"ヴェリタス探偵事務所 / ブリタニア・アーカイブ"}
+};
+
+/* ---------- helpers ---------- */
+const $=(s,r)=>(r||document).querySelector(s);
+const $$=(s,r)=>Array.prototype.slice.call((r||document).querySelectorAll(s));
+const reduced=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}};
+const pad=n=>(n<10?'0':'')+n;
+
+/* 이미지: 파일명 정규화(NFD) 재시도 후에도 없으면 안내 표시 */
+function setSrc(img,src){
+  img.dataset.src0=src;delete img.dataset.retry;
+  const ph=img.closest('.ph');
+  if(ph){ph.classList.remove('is-missing');ph.dataset.file=src}
+  img.src=src;
+}
+function guard(img){
+  const ph=img.closest('.ph')||img;
+  const fail=()=>{
+    ph.classList.add('is-missing');
+    if(!ph.dataset.file)ph.dataset.file=img.dataset.src0||img.getAttribute('src')||'';
+  };
+  const onErr=()=>{
+    const s=img.dataset.src0||img.getAttribute('src');
+    if(!s)return;
+    if(!img.dataset.retry){
+      img.dataset.retry='1';img.dataset.src0=s;
+      const n=s.normalize('NFD');
+      if(n!==s){img.src=n;return}
+    }
+    fail();
+  };
+  img.addEventListener('error',onErr);
+  img.addEventListener('load',()=>ph.classList.remove('is-missing'));
+  if(img.complete&&img.naturalWidth===0&&img.getAttribute('src'))onErr();
+}
+function guardAll(root){$$('img',root).forEach(guard)}
+
+const toastEl=$('#toast');let toastT;
+function toast(msg){
+  toastEl.textContent=msg;toastEl.classList.add('is-on');
+  clearTimeout(toastT);toastT=setTimeout(()=>toastEl.classList.remove('is-on'),5200);
+}
+
+
+/* ---------- i18n 엔진 ---------- */
+let lang='ko';
+{const sv=store('lang');if(sv==='en'||sv==='ja'||sv==='ko')lang=sv}
+const KO={};
+const T=(k,v)=>{let x=(S[lang]&&S[lang][k]!==undefined)?S[lang][k]:S.ko[k];return v===undefined?x:x.replace('{n}',function(){return v})};
+const cView=c=>lang==='ko'?c:Object.assign({},c,TRC[lang][c.id],{en:lang==='en'?'':c.en});
+const lView=l=>lang==='ko'?l:Object.assign({},l,TRL[lang][l.id],{en:lang==='en'?'':l.en});
+let rvStarted=false;
+function dv(k){return (lang!=='ko'&&D[lang]&&D[lang][k]!==undefined)?D[lang][k]:KO[k]}
+function applyDom(){
+  $$('[data-t]').forEach(el=>{
+    const k=el.dataset.t;
+    if(k.indexOf('loc:')===0){el.textContent=lView(locById[k.slice(4)]).name;return}
+    if(!(k in KO))KO[k]=el.textContent;
+    el.textContent=dv(k);
+  });
+  $$('[data-ta]').forEach(el=>{
+    el.dataset.ta.split(';').forEach(p=>{
+      const a=p.split(':')[0],k=p.split(':')[1],kk='@'+k;
+      if(!(kk in KO))KO[kk]=el.getAttribute(a);
+      el.setAttribute(a,(lang!=='ko'&&D[lang][k]!==undefined)?D[lang][k]:KO[kk]);
+    });
+  });
+}
+function applyLang(l){
+  lang=l;store('lang',l);
+  const h=document.documentElement;h.lang=l;
+  h.style.setProperty('--miss',JSON.stringify(T('miss')));
+  document.title=T('title.m');
+  applyDom();
+  $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false'));
+  renderChars();selectChar(curChar);
+  renderLocs();
+  if(!modal.hidden)fillLoc(curLoc);
+  setDN(dn.dataset.mode);
+  syncAudio();
+  measureHeader();spy();
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-lang]');
+  if(b&&b.dataset.lang!==lang)applyLang(b.dataset.lang);
+});
+
+/* ---------- BGM + 앤틱 오디오 컨트롤러 ---------- */
+const bgm=$('#bgm'),ctl=$('#audioCtl'),btnPlay=$('#btnPlay'),btnMute=$('#btnMute'),vol=$('#vol'),useP=$('#useP'),useM=$('#useM');
+let targetVol=parseFloat(store('bgmVol'));
+if(!(targetVol>=0&&targetVol<=1))targetVol=0.5;
+let fading=false,fadeTimer=null,audioFailed=false;
+bgm.loop=true;bgm.volume=targetVol;vol.value=Math.round(targetVol*100);
+
+function syncAudio(){
+  const playing=!bgm.paused&&!bgm.ended;
+  const muted=bgm.muted||(!fading&&bgm.volume===0);
+  ctl.classList.toggle('is-playing',playing);
+  ctl.classList.toggle('is-muted',muted);
+  useP.setAttribute('href',playing?'#i-pause':'#i-play');
+  btnPlay.setAttribute('aria-label',T(playing?'au.pause':'au.play'));
+  btnPlay.title=T(playing?'t.pause':'t.play');
+  useM.setAttribute('href',muted?'#i-mute':'#i-vol');
+  btnMute.setAttribute('aria-pressed',muted?'true':'false');
+  btnMute.setAttribute('aria-label',T(muted?'au.unmute':'au.mute'));
+  btnMute.title=T(muted?'au.unmute':'au.mute');
+  vol.style.setProperty('--v',vol.value+'%');
+}
+function endFade(){
+  clearInterval(fadeTimer);
+  if(fading){fading=false;bgm.volume=targetVol}
+}
+function fadeIn(ms){
+  const t0=performance.now();
+  fading=true;
+  fadeTimer=setInterval(()=>{
+    const k=Math.min(1,(performance.now()-t0)/ms);
+    bgm.volume=targetVol*(k*k*(3-2*k));
+    if(k>=1){clearInterval(fadeTimer);fading=false;syncAudio()}
+  },60);
+}
+function audioError(){
+  audioFailed=true;syncAudio();
+  toast(T('au.err'));
+}
+function startBgm(){                      /* 입장 버튼 클릭(사용자 제스처) 안에서 호출 */
+  if(reduced){bgm.volume=targetVol}else{bgm.volume=0;fading=true}
+  const p=bgm.play();
+  if(p&&p.then){
+    p.then(()=>{if(!reduced&&fading)fadeIn(2600);syncAudio()}).catch(()=>{endFade();audioError()});
+  }
+}
+btnPlay.addEventListener('click',()=>{
+  if(bgm.paused){
+    endFade();
+    const p=bgm.play();
+    if(p&&p.catch)p.catch(audioError);
+  }else bgm.pause();
+});
+btnMute.addEventListener('click',()=>{
+  endFade();
+  if(bgm.volume===0&&!bgm.muted){targetVol=0.5;bgm.volume=targetVol;vol.value=50;store('bgmVol',targetVol)}
+  else bgm.muted=!bgm.muted;
+  syncAudio();
+});
+vol.addEventListener('input',()=>{
+  endFade();
+  targetVol=vol.value/100;bgm.volume=targetVol;
+  if(targetVol>0&&bgm.muted)bgm.muted=false;
+  store('bgmVol',targetVol);syncAudio();
+});
+['play','pause','volumechange','ended'].forEach(ev=>bgm.addEventListener(ev,syncAudio));
+bgm.addEventListener('pause',()=>{if(fading)endFade()});
+bgm.addEventListener('error',()=>{audioFailed=true});
+syncAudio();
+
+/* ---------- 랜딩 → 벨벳 커튼 → 본 화면 ---------- */
+const landing=$('#landing'),app=$('#app'),curtains=$('#curtains'),enterBtn=$('#enterBtn'),gnb=$('#gnb');
+let entered=false;
+function measureHeader(){
+  const h=gnb.offsetHeight;
+  if(h)document.documentElement.style.setProperty('--hh',h+'px');
+}
+function enter(){
+  if(entered)return;
+  entered=true;enterBtn.disabled=true;
+  startBgm();
+  const T=reduced?{close:200,hold:60,open:300}:{close:1200,hold:420,open:2200};
+  curtains.style.setProperty('--close-ms',T.close+'ms');
+  curtains.style.setProperty('--open-ms',T.open+'ms');
+  curtains.hidden=false;void curtains.offsetWidth;
+  landing.classList.add('is-leaving');
+  curtains.classList.add('is-closing');
+  setTimeout(()=>{                         /* 커튼이 닫힌 순간 화면 교체 */
+    landing.hidden=true;app.hidden=false;
+    document.body.classList.remove('is-landing');
+    window.scrollTo(0,0);measureHeader();spy();
+    setTimeout(()=>{
+      curtains.classList.add('is-opening');
+      setTimeout(initReveal,500);
+      setTimeout(()=>{curtains.hidden=true;app.focus({preventScroll:true})},T.open+400);
+    },T.hold);
+  },T.close+80);
+}
+enterBtn.addEventListener('click',enter);
+if(!reduced&&window.matchMedia&&matchMedia('(pointer:fine)').matches){
+  const bg=$('.landing-bg');
+  landing.addEventListener('pointermove',e=>{
+    bg.style.setProperty('--px',(-(e.clientX/innerWidth-.5)*18).toFixed(1)+'px');
+    bg.style.setProperty('--py',(-(e.clientY/innerHeight-.5)*12).toFixed(1)+'px');
+  });
+}
+guard($('.landing-bg'));
+try{enterBtn.focus({preventScroll:true})}catch(e){}
+
+/* ---------- 스크롤 등장 연출 ---------- */
+const canReveal=!reduced&&'IntersectionObserver' in window;
+if(canReveal)document.documentElement.classList.add('js-rv');
+function initReveal(){
+  rvStarted=true;
+  if(!canReveal)return;
+  const io=new IntersectionObserver(es=>{
+    let k=0;
+    es.forEach(en=>{
+      if(!en.isIntersecting)return;
+      en.target.style.setProperty('--rd',(k++*0.09).toFixed(2)+'s');
+      en.target.classList.add('in');
+      io.unobserve(en.target);
+    });
+  },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
+  $$('.rv').forEach(el=>io.observe(el));
+}
+
+/* ---------- 메뉴 강조(스크롤 스파이) ---------- */
+const navLinks=$$('.nav a');
+const secEls=['world','characters','locations'].map(id=>document.getElementById(id));
+function spy(){
+  if(app.hidden)return;
+  const probe=window.scrollY+gnb.offsetHeight+window.innerHeight*0.28;
+  let cur=secEls[0].id;
+  secEls.forEach(s=>{if(s.getBoundingClientRect().top+window.scrollY<=probe)cur=s.id});
+  if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4)cur=secEls[secEls.length-1].id;
+  navLinks.forEach(a=>a.classList.toggle('is-on',a.dataset.nav===cur));
+}
+let ticking=false;
+addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(()=>{ticking=false;spy()})}},{passive:true});
+addEventListener('resize',()=>{measureHeader();spy()});
+addEventListener('load',measureHeader);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(measureHeader);
+function goTo(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
+}
+/* ---------- 인물: 탭 + 인물 조서 ---------- */
+const charIdx={},locById={};
+CHARS.forEach((c,i)=>{charIdx[c.id]=i});
+LOCS.forEach(l=>{locById[l.id]=l});
+const rosterEl=$('#roster'),stageEl=$('#stage'),countEl=$('#charCount');
+let curChar=0;
+const bullets=a=>'<ul class="bul">'+a.map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>';
+
+function renderChars(){
+  rosterEl.innerHTML=CHARS.map((c0,i)=>{
+    const c=cView(c0);
+    return '<button class="tab" role="tab" type="button" id="tab-'+c.id+'" aria-controls="panel-'+c.id+'" aria-selected="false" tabindex="-1" data-i="'+i+'">'+
+      '<span class="frame"><span class="ph"><img src="'+c.img+'" alt="" loading="lazy" decoding="async"></span></span>'+
+      '<span class="tab-plate"><span class="tab-first">'+esc(c.name.split(/[ ・]/)[0])+'</span><span class="tab-role">'+esc(c.tag)+'</span></span></button>';
+  }).join('');
+  stageEl.innerHTML=CHARS.map((c0,i)=>{
+    const c=cView(c0),nm=esc(c.name),b=c0.basic;
+    const rows=[[T('lbl.gender'),T(b[0][1]==='여성'?'g.f':'g.m')],[T('lbl.age'),T('age',parseInt(b[1][1],10))],[T('lbl.height'),b[2][1]],[T('lbl.weight'),b[3][1]]];
+    const basic=rows.map(r=>'<div><dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd></div>').join('')+
+      '<div class="wide"><dt>'+esc(T('lbl.role'))+'</dt><dd>'+esc(c.role||b[4][1])+'</dd></div>';
+    const people=c.people.map(id=>{const o=CHARS[charIdx[id]];
+      return '<button class="chip" type="button" data-char="'+id+'"><span class="ava"><img src="'+o.img+'" alt="" loading="lazy" decoding="async"></span>'+esc(cView(o).name)+'</button>'}).join('');
+    const places=c.places.map(id=>{const l=locById[id];
+      return '<button class="chip" type="button" data-loc="'+id+'"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#'+l.icon+'"/></svg>'+esc(lView(l).name)+'</button>'}).join('');
+    const rel=(people?'<span class="rel-label">'+esc(T('rel.people'))+'</span>'+people:'')+(places?'<span class="rel-label">'+esc(T('rel.places'))+'</span>'+places:'');
+    return '<article class="dossier" role="tabpanel" id="panel-'+c.id+'" aria-labelledby="tab-'+c.id+'" tabindex="0" hidden>'+
+      '<figure class="portrait"><div class="frame"><div class="ph" style="--ar:3/4"><img src="'+c.img+'" alt="'+esc(T('portrait',c.name))+'" decoding="async"></div>'+
+        '<button class="zoom" type="button" data-zoom="'+i+'" aria-label="'+esc(T('zoom',c.name))+'"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-zoom"/></svg></button></div>'+
+        '<figcaption class="plate"><strong>'+nm+'</strong><em>'+esc(c.en)+'</em></figcaption></figure>'+
+      '<div class="paper file"><header class="file-head"><h3 class="file-name">'+nm+'</h3><p class="file-en">'+esc(c.en)+'</p><p class="file-line">'+esc(c.line)+'</p></header>'+
+        '<section class="blk"><h4>'+esc(T('blk.basic'))+'</h4><dl class="ledger">'+basic+'</dl></section>'+
+        '<div class="cols"><section class="blk"><h4>'+esc(T('blk.look'))+'</h4>'+bullets(c.look)+'</section><section class="blk"><h4>'+esc(T('blk.outfit'))+'</h4>'+bullets(c.outfit)+'</section></div>'+
+        '<section class="blk"><h4>'+esc(T('blk.trait'))+'<span class="stamp">'+c.mbti+'</span></h4>'+bullets(c.trait)+'</section>'+
+        '<section class="blk"><h4>'+esc(T('blk.feat'))+'</h4>'+bullets(c.feat)+'</section>'+
+        (rel?'<div class="rel">'+rel+'</div>':'')+
+      '</div></article>';
+  }).join('');
+  guardAll(rosterEl);guardAll(stageEl);
+}
+function selectChar(i,opts){
+  opts=opts||{};
+  i=(i+CHARS.length)%CHARS.length;curChar=i;
+  const tabs=$$('.tab',rosterEl);
+  tabs.forEach((t,k)=>{t.setAttribute('aria-selected',k===i?'true':'false');t.tabIndex=k===i?0:-1});
+  $$('.dossier',stageEl).forEach((p,k)=>{p.hidden=k!==i});
+  countEl.textContent=pad(i+1)+' / '+pad(CHARS.length);
+  if(opts.focus)tabs[i].focus({preventScroll:true});
+  if(rosterEl.scrollWidth>rosterEl.clientWidth+2){
+    rosterEl.scrollTo({left:tabs[i].offsetLeft-(rosterEl.clientWidth-tabs[i].offsetWidth)/2,behavior:reduced?'auto':'smooth'});
+  }
+}
+renderChars();selectChar(0);
+rosterEl.addEventListener('click',e=>{const t=e.target.closest('.tab');if(t)selectChar(+t.dataset.i)});
+rosterEl.addEventListener('keydown',e=>{
+  const k=e.key;
+  if(k==='Home'){e.preventDefault();selectChar(0,{focus:true})}
+  else if(k==='End'){e.preventDefault();selectChar(CHARS.length-1,{focus:true})}
+  else if(k==='ArrowRight'||k==='ArrowDown'){e.preventDefault();selectChar(curChar+1,{focus:true})}
+  else if(k==='ArrowLeft'||k==='ArrowUp'){e.preventDefault();selectChar(curChar-1,{focus:true})}
+});
+function stepChar(d){
+  selectChar(curChar+d);
+  rosterEl.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
+}
+$('#prevChar').addEventListener('click',()=>stepChar(-1));
+$('#nextChar').addEventListener('click',()=>stepChar(1));
+let sx=0,sy=0;
+stageEl.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+stageEl.addEventListener('touchend',e=>{
+  const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
+  if(Math.abs(dx)>80&&Math.abs(dx)>Math.abs(dy)*2)selectChar(curChar+(dx<0?1:-1));
+},{passive:true});
+
+/* ---------- 인물 이미지 확대 ---------- */
+const lb=$('#lightbox'),lbImg=$('#lbImg'),lbCap=$('#lbCap');
+let lbOpener=null;
+function openLightbox(i,opener){
+  const c=CHARS[i];
+  const cn=cView(c).name;lbImg.alt=T('lbimg',cn);lbImg.src=c.img;lbCap.textContent=cn;
+  lbOpener=opener;lb.hidden=false;document.body.style.overflow='hidden';
+  $('.modal-x',lb).focus();
+}
+function closeLightbox(){
+  lb.hidden=true;lbImg.removeAttribute('src');
+  if(modal.hidden)document.body.style.overflow='';
+  if(lbOpener)lbOpener.focus({preventScroll:true});
+}
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.closest('[data-close]'))closeLightbox()});
+
+/* ---------- 아르덴 런던의 하루 (아침/밤) ---------- */
+const dn=$('#dayNight'),dnText=$('#dnText');
+function setDN(mode){
+  dn.dataset.mode=mode;dnText.textContent=T('dn.'+mode);
+  $$('.seg button',dn).forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===mode?'true':'false'));
+}
+$$('.seg button',dn).forEach(b=>b.addEventListener('click',()=>setDN(b.dataset.mode)));
+setDN('night');
+
+/* ---------- 지역: 고지도 핀 + 액자 카드 + 상세 모달 ---------- */
+const pinsEl=$('#pins'),gridEl=$('#locGrid'),modal=$('#locModal');
+let curLoc=0,modalOpener=null;
+
+function renderLocs(){
+  const L=LOCS.map(lView);
+  pinsEl.innerHTML=L.map((l,i)=>
+    '<button class="pin" type="button" data-loc="'+l.id+'" style="left:'+l.x+'%;top:'+l.y+'%" aria-haspopup="dialog" aria-label="'+esc(T('pin',l.name))+'">'+
+      '<span class="pin-core"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#'+l.icon+'"/></svg></span>'+
+      '<span class="pin-no" aria-hidden="true">'+(i+1)+'</span><span class="pin-label">'+esc(l.name)+'</span></button>').join('');
+  $('#locIndex').innerHTML=L.map((l,i)=>'<li><button type="button" data-loc="'+l.id+'"><span class="n">'+(i+1)+'</span><span>'+esc(l.name)+'</span></button></li>').join('');
+  gridEl.innerHTML=L.map((l,i)=>
+    '<article class="loc rv'+(rvStarted?' in':'')+'" data-id="'+l.id+'"><button class="loc-open" type="button" data-loc="'+l.id+'" aria-haspopup="dialog">'+
+      '<span class="frame"><span class="ph" style="--ar:4/3"><img src="'+l.img+'" alt="" loading="lazy" decoding="async"></span><span class="loc-no" aria-hidden="true">'+(i+1)+'</span></span>'+
+      '<span class="loc-plaque"><span class="loc-name">'+esc(l.name)+'</span><span class="loc-en">'+esc(l.en)+'</span></span>'+
+      '<span class="loc-sum">'+esc(l.sum)+'</span></button></article>').join('');
+  guardAll(gridEl);
+  if(curLoc>=0&&!modal.hidden)$$('#locIndex button').forEach((b,k)=>{if(k===curLoc)b.setAttribute('aria-current','true')});
+}
+function hot(id,on){
+  const p=$('.pin[data-loc="'+id+'"]',pinsEl),c=$('.loc[data-id="'+id+'"]',gridEl);
+  if(p)p.classList.toggle('is-hot',on);
+  if(c)c.classList.toggle('is-hot',on);
+}
+function bindHot(root){
+  root.addEventListener('mouseover',e=>{const t=e.target.closest('[data-loc]');if(t)hot(t.dataset.loc,true)});
+  root.addEventListener('mouseout',e=>{const t=e.target.closest('[data-loc]');if(t)hot(t.dataset.loc,false)});
+  root.addEventListener('focusin',e=>{const t=e.target.closest('[data-loc]');if(t)hot(t.dataset.loc,true)});
+  root.addEventListener('focusout',e=>{const t=e.target.closest('[data-loc]');if(t)hot(t.dataset.loc,false)});
+}
+renderLocs();bindHot(pinsEl);bindHot(gridEl);
+guard($('#locImg'));
+
+function fillLoc(i,keepAnim){
+  const l=lView(LOCS[i]);curLoc=i;
+  $('#locTitle').textContent=l.name;
+  $('#locEn').textContent=l.en;
+  $('#locTags').innerHTML='<li class="is-place">'+esc(l.region)+'</li>'+l.tags.map(t=>'<li>'+esc(t)+'</li>').join('');
+  $('#locText').innerHTML=l.desc.map(p=>'<p>'+esc(p)+'</p>').join('');
+  const img=$('#locImg');
+  img.alt=T('locimg',l.name);setSrc(img,l.img);
+  const rel=$('#locRel');
+  if(l.people.length){
+    rel.innerHTML='<span class="rel-label">'+esc(T('rel.people'))+'</span>'+l.people.map(id=>{const c=CHARS[charIdx[id]];
+      return '<button class="chip" type="button" data-char="'+id+'"><span class="ava"><img src="'+c.img+'" alt="" decoding="async"></span>'+esc(cView(c).name)+'</button>'}).join('');
+    rel.hidden=false;guardAll(rel);
+  }else{rel.hidden=true;rel.innerHTML=''}
+  $$('#locIndex button').forEach((b,k)=>{if(k===i)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current')});
+  $('#locCount').textContent=(i+1)+' / '+LOCS.length;
+  $('.modal-scroll',modal).scrollTop=0;
+  if(!reduced&&!keepAnim){const d=$('.modal-doc',modal);d.style.animation='none';void d.offsetWidth;d.style.animation=''}
+}
+function openLoc(id,opener){
+  const i=LOCS.findIndex(l=>l.id===id);
+  if(i<0)return;
+  if(!modal.hidden){swapLoc(i,i>curLoc?1:-1);return}
+  fillLoc(i);
+  if(modal.hidden){
+    modalOpener=opener||document.activeElement;
+    modal.hidden=false;document.body.style.overflow='hidden';
+    $('.modal-x',modal).focus({preventScroll:true});
+  }
+}
+function closeLoc(restore){
+  swapReset();modal.hidden=true;
+  if(lb.hidden)document.body.style.overflow='';
+  if(restore!==false&&modalOpener&&document.contains(modalOpener))modalOpener.focus({preventScroll:true});
+  modalOpener=null;
+}
+let swapBusy=false,swapT1=0,swapT2=0;
+function swapLoc(i,d){
+  if(swapBusy||i===curLoc)return;
+  if(reduced){fillLoc(i,true);return}
+  swapBusy=true;modal.classList.add('is-busy');
+  modal.style.setProperty('--dx',(-d*42)+'px');
+  modal.classList.add('sw-out');                       // 1) 현재 내용 페이드 아웃 + 슬라이드
+  swapT1=setTimeout(()=>{
+    fillLoc(i,true);                                   // 2) 내용 교체
+    modal.style.setProperty('--dx',(d*42)+'px');
+    modal.classList.remove('sw-out');modal.classList.add('sw-pre');
+    void modal.offsetWidth;
+    modal.classList.remove('sw-pre');                  // 3) 반대편에서 페이드 인
+    swapT2=setTimeout(()=>{swapBusy=false;modal.classList.remove('is-busy')},430);
+  },300);
+}
+function swapReset(){clearTimeout(swapT1);clearTimeout(swapT2);swapBusy=false;modal.classList.remove('sw-out','sw-pre','is-busy')}
+function stepLoc(d){swapLoc((curLoc+d+LOCS.length)%LOCS.length,d)}
+$('#locPrev').addEventListener('click',()=>stepLoc(-1));
+$('#locNext').addEventListener('click',()=>stepLoc(1));
+
+/* ---------- 공통 클릭 · 키보드 ---------- */
+document.addEventListener('click',e=>{
+  const z=e.target.closest('[data-zoom]');
+  if(z){openLightbox(+z.dataset.zoom,z);return}
+  const c=e.target.closest('[data-char]');
+  if(c){
+    if(!modal.hidden)closeLoc(false);
+    selectChar(charIdx[c.dataset.char]);goTo('characters');return;
+  }
+  const l=e.target.closest('[data-loc]');
+  if(l){openLoc(l.dataset.loc,l);return}
+  if(!modal.hidden&&modal.contains(e.target)&&e.target.closest('[data-close]'))closeLoc();
+});
+function trapTab(e,box){
+  const f=$$('button,[href],input,[tabindex]:not([tabindex="-1"])',box).filter(el=>!el.disabled&&!el.hidden&&el.offsetParent!==null);
+  if(!f.length)return;
+  const a=f[0],z=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}
+  else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}
+}
+document.addEventListener('keydown',e=>{
+  if(!lb.hidden){
+    if(e.key==='Escape')closeLightbox();
+    else if(e.key==='Tab')trapTab(e,lb);
+    return;
+  }
+  if(!modal.hidden){
+    if(e.key==='Escape')closeLoc();
+    else if(e.key==='ArrowLeft')stepLoc(-1);
+    else if(e.key==='ArrowRight')stepLoc(1);
+    else if(e.key==='Tab')trapTab(e,modal);
+  }
+});
+measureHeader();
+applyLang(lang);
+})();
+</script>
+</body>
+</html>
